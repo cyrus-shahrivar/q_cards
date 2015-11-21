@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var mongoose = require('mongoose'),
     User = require('../models/user.js');
 
@@ -19,3 +20,6 @@ module.exports.controller = function(app){
 
 
 }
+=======
+users_controller.js
+>>>>>>> 0d3d33d6d65f16e2361491f6ac8312d57fee2a6c
