@@ -1,14 +1,26 @@
 $(function () {
+  appLaunch();
   $("#login-button").on('click', startSessionAndGetProfile);
   $("#sign-up-button").on('click', getSettings);
-  $("#update-account").on('click', postSeetings);
+  $("#update-account").on('click', getProfileAndPostSettings);
+  $("#search").on('click', searchContacts);
 });
+
+var appLaunch = function () {
+  var appBody = $('#app-body');
+  var homeScreen = Handlebars.compile($("#home-screen").html());
+  appBody.prepend(homeScreen);
+}
 
 var startSessionAndGetProfile = function(){
   console.log("login-button is working");
   var username = $("#username-login").val();
   var password = $("#password-login").val();
   console.log(username, password);
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var profileScreen = Handlebars.compile($("#profile-screen").html());
+  appBody.append(profileScreen);
 }
 
 var getSettings = function () {
@@ -16,17 +28,37 @@ var getSettings = function () {
   var username = $("#username-login").val();
   var password = $("#password-login").val();
   console.log(username, password);
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var settingsScreen = Handlebars.compile($("#settings-screen").html());
+  appBody.append(settingsScreen);
 }
 
-var postSeetings = function () {
-  var username = $("#username").val();
-  var password = $("#password").val();
-  var name = $("#name").val();
-  var phone = $("#phone").val();
-  var email = $("#email").val();
-  var company = $("#company").val();
-  var companyAddress = $("#company-address").val();
-  var companyLogo = $("#company-logo-url").val();
-  var socialMedia = $("#social-media").val();
-  console.log(username + password + name + phone + email + company + companyAddress + companyLogo + socialMedia);
+var getProfileAndPostSettings = function() {
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var profileScreen = Handlebars.compile($("#profile-screen").html());
+  appBody.append(profileScreen);
+}
+
+// var postSettings = function () {
+//   var username = $("#username").val();
+//   var password = $("#password").val();
+//   var name = $("#name").val();
+//   var phone = $("#phone").val();
+//   var email = $("#email").val();
+//   var company = $("#company").val();
+//   var companyAddress = $("#company-address").val();
+//   var companyLogo = $("#company-logo-url").val();
+//   var socialMedia = $("#social-media").val();
+//   console.log(username + password + name + phone + email + company + companyAddress + companyLogo + socialMedia);
+//   $("#app-body").empty();
+//   var appBody = $('#app-body');
+//   var profileScreen = Handlebars.compile($("#profile-screen").html());
+//   appBody.append(profileScreen);
+// }
+
+var searchContacts = function () {
+  var name = $("#find-name").val()
+  console.log(name);
 }
