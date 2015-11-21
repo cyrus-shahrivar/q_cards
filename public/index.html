@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>QCards</title>
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <script src="/bower_components/handlebars/handlebars.js"></script>
+  	<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>QCards + <span id="nav"> &#9776</span></h1>
+    </header>
+    <!-- <template id="home-screen"> -->
+    <hr>
+      <p>
+        <input type="text" placeholder="Username" name="name" id="username-login">
+      </p>
+      <p>
+        <input type="password" placeholder="Password" name="password" id="password-login">
+      </p>
+      <p>
+        <button type="button" name="button" id="login-button">Login</button>
+      </p>
+      <p>
+        <button type="button" name="button" id="sign-up button">Sign Up!</button>
+      </p>
+    <hr>
+    <!-- </template> -->
+    <!-- <template id="profile-screen"> -->
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="QRCode" id="QRCode"/>
+      <p>
+        < Name's Business Card >
+      </p>
+    <hr>
+    <!-- </template> -->
+    <!-- <template id="settings-screen"> -->
+      <p><input type="text" placeholder="Username" name="username" id="username"></p>
+      <p><input type="password" placeholder="Password" name="password" id="password"></p>
+      <p><input type="text" placeholder="Name" name="name" id="name"></p>
+      <p><input type="tel" placeholder="Phone Number" name="phone" id="phone"></p>
+      <p><input type="email" placeholder="Email Address" name="email" id="email"></p>
+      <p><input type="text" placeholder="Company" name="company" id="company"></p>
+      <p><input type="text" placeholder="Company Address" name="company-address" id="company-address"></p>
+      <p><input type="text" placeholder="Company Logo" name="company-logo" id="company-logo-url"></p>
+      <p><input type="text" placeholder="Social Media URLs (Separate By Commas)" name="seach" id="social-media"></p>
+      <p><button type="button" name="button" id="update-account">Update Account</button></p>
+    <hr>
+    <!-- </template> -->
+    <!-- <template id="contacts-screen"> -->
+      <p>
+        <input type="search" placeholder="Find a contact" name="search" id="search">
+        <button type="button" name="button" id="sign-up button">Search</button>
+      </p>
+      <div class="contact">
+        <p>Name</p>
+        <p>Company</p>
+        <img src="" alt="logo" id="company-logo-img"/>
+        <p>Address</p>
+        <p>Phone</p>
+        <p>Email</p>
+        <p>Social Media</p>
+      </div>
+    <!-- </template> -->
+    <!-- <template id="about-screen"> -->
+    <hr>
+    <h2>About Us</h2>
+      <p>
+        Welcome to QCards! QCards is the ultimate website for your business card needs.  Our mission is to reduce the paper clutter in this world, in your wallets, and for some of you, in your Rolodexes, by providing to you a simple to use business card QR code scanner and business contacts list.
+      </p>
+    <hr>
+    <!-- </template> -->
+    <footer>
+      About Us  Copyright
+    </footer>
+  </body>
+</html>
