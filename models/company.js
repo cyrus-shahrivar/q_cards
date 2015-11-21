@@ -5,6 +5,7 @@ var CompanySchema = new mongoose.Schema({
   email: String,
   phone: String,
   website: String,
+  //social_media_links is an object? 
   social_media_links: {
     url: String
   }
