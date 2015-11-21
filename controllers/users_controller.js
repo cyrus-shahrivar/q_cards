@@ -2,27 +2,49 @@ var mongoose = require('mongoose'),
     User = require('../models/user.js');
 
 module.exports.controller = function(app){
-      app.get('/users', )
-
-
-
-      app.get('/contacts', function(req, res){
-        User.find().exec(function(err, contacts){
-          if(err) return next(err);
-          res.send(contacts);
+      app.get('/users', function(req, res) {
+        User.find().populate('posts').exec(function (err, users) {
+          res.send(users);
         });
       });
-      //   "/user" is the current user, right? So when I try to add a new card, it will be added to the current user id
-      //therefore, do I need to specify the id?
-      app.post('/user/:id/newContact', function(req, res){
-        var current_user = User.findById(req.params.id);
-        var user_im_trying_to_save = 
-          })
-        })
-      })
+
+      app.get('/users/:id', function(req, res) {
+        User.findById(req.params.id).exec(function(err, user) {
+          res.send(user);
+        });
+      });
+
+      app.post('/users/', function(req, res) {
+        var user = new User(req.body);
+        user.save(function(err) {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log("User saved.");
+          }
+        });
+      });
+
+};
+
+///////// Kate's code ////////
+      // app.get('/contacts', function(req, res){
+      //   User.find().exec(function(err, contacts){
+      //     if(err) return next(err);
+      //     res.send(contacts);
+      //   });
+      // });
+      // //   "/user" is the current user, right? So when I try to add a new card, it will be added to the current user id
+      // //therefore, do I need to specify the id?
+      // app.post('/user/:id/newContact', function(req, res){
+      //   var current_user = User.findById(req.params.id);
+      //   var user_im_trying_to_save = 
+      //     })
+      //   })
+      // })
 
 
-}
+
 
 
 /*
