@@ -5,7 +5,7 @@ var alphabet = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V
 alphabet forEach(letter) {
 	letter = [],
 	//if user.name.substr(0,1) == letter,
-	letter.push(user);
+	letter.my_card.lastname(user);
 }
 
 
