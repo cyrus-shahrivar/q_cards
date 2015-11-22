@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qcards</title>
     <link rel="stylesheet" href="./css/stylesheet.css">
   	<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -10,8 +10,9 @@
     <script type="text/javascript" src="./js/app.js"></script>
   </head>
   <body>
+  <div id="master-container">
     <header>
-      <img src="./images/Qcards1.png" alt="logo" id="logo"/><span id="add-card">+</span> <span id="nav"> &#9776</span>
+      <img src="./images/Qcards1.png" alt="logo" id="logo"/><span id="add-card">+</span>
     </header>
     <!-- <input type="file" capture="camera" accept="image/*" id="cameraInput" name="cameraInput"> -->
 
@@ -81,7 +82,22 @@
     </template>
 
     <footer>
-      <span id="about-link">About Us</span>  &copy; Qcards
+      <div class="nav">
+        <div class="navbox">
+          <span id="profile-link">&#128100;<br>My Profile</span>
+        </div>
+        <div class="navbox">
+          <span id="contacts-link">&#128199;<br>Contacts</span>
+        </div>
+        <div class="navbox">
+          <span id="settings-link">&#9881;&#9881;&#9881;<br>Settings</span>
+        </div>
+        <div class="navbox">
+          <span id="about-link">&#8263;<br>About Us</span>
+        </div>
+      </div>
+      <div id="copyright">&copy; Qcards 2015</div>
     </footer>
+  </div>
   </body>
 </html>
