@@ -5,6 +5,9 @@ var express = require('express'),
     mongoose = require('mongoose'),
     router = express.Router(),
     fs = require('fs'),
+    Companies = require('./controlers/companies_controller.js'),
+    Users =  require('./controllers/users_controller.js'),
+    Sessions = require('.controllers/sessions_controller.js'),
     app = express();
 
 //set up middleware
@@ -27,17 +30,17 @@ mongoose.connect('mongodb://localhost/qcards_app', function (err) {
 app.listen(3000, function(){
   console.log('Listening to a frilled lizard on port 3000..');
 });
-//this command will tell javascript to go in order.  
+//this command will tell javascript to go in order.
 //And if the file substring is javascirpt, it will route us there and use that file as a controller.
 
 // app.use('/', Sessions);
-app.use('/', Users);
-app.use('/', Companies);
+// app.use('/', Users);
+// app.use('/', Companies);
 
 // THIS IS CAUSING A BUG. FOR SOME REASON THE SERVER ISN'T FINDING './controllers/:file'
-// fs.readdirSync('./controllers').forEach(function(file) {
-//   if (file.substr(-3) == '.js') {
-//     route = require('./controllers/' + file);
-//     route.controller(app);
-//   }
-// });
+fs.readdirSync('./controllers').forEach(function(file) {
+  if (file.substr(-3) == '.js') {
+    route = require('./controllers/' + file);
+    route.controller(app);
+  }
+});
