@@ -1,6 +1,15 @@
 body {
   background: rgba(0, 9, 0, 0.2);
   /*background: url("http://thumbs.dreamstime.com/t/gray-fabric-textile-texture-background-high-detail-50300703.jpg");*/
+  
+}
+
+#master-container {
+  max-width: 320px;
+  text-align: center;
+  /*border: 1px solid black;*/
+  margin: 0 auto;
+  background-color: #8FBC8F
 }
 
 #nav {
@@ -14,25 +23,62 @@ body {
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   background-color: rgb(237, 241, 218);
   padding: 10px;
-  margin-bottom: 15px;
+  margin: 0 auto;
+  text-align: left;
 }
 
 #logo {
   width: 100px;
+  margin-top: 5px;
 }
 
-#about-link:hover {
+/*#about-link:hover {
   text-decoration: underline;
   cursor: pointer;
   color: darkgreen;
-}
+}*/
 
 #add-card:hover {
   cursor: pointer;
   color: darkgreen;
+
 }
 
-#nav:hover {
+#add-card {
+  font-size: 40px;
+  vertical-align: top;
+  margin-left: 20px;
+}
+
+.navbox:hover {
   cursor: pointer;
   color: darkgreen;
+}
+
+.navbox {
+  display: inline-block;
+  background-color: #AFCCAF;
+  width: 71px;
+  height: 50px;
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.nav {
+  max-width: 320px;
+  margin-top: 25px;
+  background-color: #AFCCAF;
+  height: 50px;
+}
+
+
+#QRCode {
+  padding: 3px;
+  background-color: white;
+  border: 3px solid black;
+}
+
+#copyright {
+  padding-top: 5px;
+  background-color: #AFCCAF;
 }

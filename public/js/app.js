@@ -8,16 +8,16 @@ $(function () {
   appLaunch();
 
   $("#app-body").on('click', "#login-button", startSessionAndGetProfile);
-
   $("#app-body").on('click', "#sign-up-button", getSettings);
-
   $("#app-body").on('click', "#update-account", getProfileAndPostSettings);
+  $("#app-body").on('click', "#my-cards", getMyCards);
 
   // $("#app-body").on('click', "#search", searchContacts);
 
   $("footer").on('click', "#about-link", getAboutScreen);
-
-  $("#app-body").on('click', "#my-cards", getMyCards);
+  $("footer").on('click', "#profile-link", getProfile);
+  $("footer").on('click', "#contacts-link", getMyCards);
+  $("footer").on('click', "#settings-link", getSettings);
 });
 
 var startSessionAndGetProfile = function() {
@@ -61,6 +61,13 @@ var getMyCards = function() {
   var appBody = $('#app-body');
   var myCardsScreen = Handlebars.compile($("#contacts-screen").html());
   appBody.append(myCardsScreen);
+};
+
+var getProfile = function() {
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var profileScreen = Handlebars.compile($("#profile-screen").html());
+  appBody.append(profileScreen);
 };
 
 
