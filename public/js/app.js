@@ -15,7 +15,9 @@ $(function () {
 
   // $("#app-body").on('click', "#search", searchContacts);
 
-  $("#app-body").on('click', "span#about-link", getAboutScreen);
+  $("footer").on('click', "#about-link", getAboutScreen);
+
+  $("#app-body").on('click', "#my-cards", getMyCards);
 });
 
 var startSessionAndGetProfile = function() {
@@ -52,6 +54,13 @@ var getAboutScreen = function () {
   var appBody = $('#app-body');
   var aboutScreen = Handlebars.compile($("#about-screen").html());
   appBody.append(aboutScreen);
+};
+
+var getMyCards = function() {
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var myCardsScreen = Handlebars.compile($("#contacts-screen").html());
+  appBody.append(myCardsScreen);
 };
 
 
