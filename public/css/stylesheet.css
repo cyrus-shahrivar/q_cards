@@ -1,3 +1,8 @@
+body {
+  background: rgba(0, 9, 0, 0.2);
+  /*background: url("http://thumbs.dreamstime.com/t/gray-fabric-textile-texture-background-high-detail-50300703.jpg");*/
+}
+
 #nav {
   text-decoration: none;
   color: black;
@@ -9,4 +14,25 @@
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   background-color: rgb(237, 241, 218);
   padding: 10px;
+  margin-bottom: 15px;
+}
+
+#logo {
+  width: 100px;
+}
+
+#about-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: darkgreen;
+}
+
+#add-card:hover {
+  cursor: pointer;
+  color: darkgreen;
+}
+
+#nav:hover {
+  cursor: pointer;
+  color: darkgreen;
 }
