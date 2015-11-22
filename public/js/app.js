@@ -1,45 +1,42 @@
 $(function () {
+  var appLaunch = function () {
+    var appBody = $('#app-body');
+    var homeScreen = Handlebars.compile($("#home-screen").html());
+    appBody.prepend(homeScreen);
+  }
+
   appLaunch();
+
+  var startSessionAndGetProfile = function(){
+    // console.log("login-button is working");
+    // var username = $("#username-login").val();
+    // var password = $("#password-login").val();
+    // console.log(username, password);
+    $("#app-body").empty();
+    var appBody = $('#app-body');
+    var profileScreen = Handlebars.compile($("#profile-screen").html());
+    appBody.append(profileScreen);
+  }
+
   $("#login-button").on('click', startSessionAndGetProfile);
-  $("#sign-up-button").on('click', getSettings);
-  $("#update-account").on('click', getProfileAndPostSettings);
-  $("#search").on('click', searchContacts);
-});
 
-var appLaunch = function () {
-  var appBody = $('#app-body');
-  var homeScreen = Handlebars.compile($("#home-screen").html());
-  appBody.prepend(homeScreen);
-}
+  var getSettings = function () {
+    // console.log("sign up button is working");
+    // var username = $("#username-login").val();
+    // var password = $("#password-login").val();
+    // console.log(username, password);
+    $("#app-body").empty();
+    var appBody = $('#app-body');
+    var settingsScreen = Handlebars.compile($("#settings-screen").html());
+    appBody.append(settingsScreen);
+  }
 
-var startSessionAndGetProfile = function(){
-  console.log("login-button is working");
-  var username = $("#username-login").val();
-  var password = $("#password-login").val();
-  console.log(username, password);
-  $("#app-body").empty();
-  var appBody = $('#app-body');
-  var profileScreen = Handlebars.compile($("#profile-screen").html());
-  appBody.append(profileScreen);
-}
-
-var getSettings = function () {
-  console.log("sign up button is working");
-  var username = $("#username-login").val();
-  var password = $("#password-login").val();
-  console.log(username, password);
-  $("#app-body").empty();
-  var appBody = $('#app-body');
-  var settingsScreen = Handlebars.compile($("#settings-screen").html());
-  appBody.append(settingsScreen);
-}
-
-var getProfileAndPostSettings = function() {
-  $("#app-body").empty();
-  var appBody = $('#app-body');
-  var profileScreen = Handlebars.compile($("#profile-screen").html());
-  appBody.append(profileScreen);
-}
+  var getProfileAndPostSettings = function() {
+    $("#app-body").empty();
+    var appBody = $('#app-body');
+    var profileScreen = Handlebars.compile($("#profile-screen").html());
+    appBody.append(profileScreen);
+  }
 
 // var postSettings = function () {
 //   var username = $("#username").val();
@@ -58,7 +55,36 @@ var getProfileAndPostSettings = function() {
 //   appBody.append(profileScreen);
 // }
 
-var searchContacts = function () {
-  var name = $("#find-name").val()
-  console.log(name);
-}
+  var searchContacts = function () {
+    var name = $("#find-name").val()
+    console.log(name);
+  }
+
+
+
+  var getAboutScreen = function () {
+    $("#app-body").empty();
+    var appBody = $('#app-body');
+    var aboutScreen = Handlebars.compile($("#about-screen").html());
+    appBody.append(aboutScreen);
+  }
+
+
+  $("#sign-up-button").on('click', function (e) {
+    e.preventDefault();
+    getSettings();
+  });
+  $("#update-account").on('click', function (e) {
+    e.preventDefault();
+    getProfileAndPostSettings();
+  });
+  $("#search").on('click', searchContacts);
+
+  $("#about-link").on('click', function (e) {
+    e.preventDefault();
+    getAboutScreen();
+  });
+
+
+
+});
