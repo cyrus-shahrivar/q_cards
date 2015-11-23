@@ -6,9 +6,9 @@ var express = require('express'),
     mongoose = require('mongoose'),
     router = express.Router(),
     fs = require('fs'),
-    Companies = require('./controlers/companies_controller.js'),
-    Users =  require('./controllers/users_controller.js'),
-    Sessions = require('.controllers/sessions_controller.js'),
+    companies = require('./controllers/companies_controller.js'),
+    users =  require('./controllers/users_controller.js'),
+    sessions = require('./controllers/sessions_controller.js'),
     app = express();
 
 //set up middleware
@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use('/bower_components/', express.static(__dirname + '/bower_components/'));
 app.use(session);
+// secret saveUninitialized, etc...
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -36,14 +37,15 @@ app.listen(3000, function(){
 //this command will tell javascript to go in order.
 //And if the file substring is javascirpt, it will route us there and use that file as a controller.
 
-// app.use('/', Sessions);
-// app.use('/', Users);
-// app.use('/', Companies);
+
+// app.use('/', sessions);
+app.use('/', users);
+app.use('/', companies);
 
 // THIS IS CAUSING A BUG. FOR SOME REASON THE SERVER ISN'T FINDING './controllers/:file'
-fs.readdirSync('./controllers').forEach(function(file) {
-  if (file.substr(-3) == '.js') {
-    route = require('./controllers/' + file);
-    route.controller(app);
-  }
-});
+// fs.readdirSync('./controllers').forEach(function(file) {
+//   if (file.substr(-3) == '.js') {
+//     // route = require('./controllers/' + file);
+//     route.controller(app);
+//   }
+// });

@@ -1,5 +1,7 @@
 var mongoose = require('mongoose'),
-    User = require('../models/user.js');
+    User = require('../models/user.js'),
+    express = require('express'),
+    router = express.Router();
 
 module.exports.controller = function(app){
       app.get('/users', function(req, res) {
@@ -27,15 +29,26 @@ module.exports.controller = function(app){
 
 };
 
+module.exports = router;
+
 ///////// Kate's code ////////
       // app.get('/contacts', function(req, res){
-      //   User.find().exec(function(err, contacts){
+      //   var currentUser = ""
+      //   var contact = ""
+      //   //if User.session.id === current.Session.id;
+      //     //User === currentUser;
+      //   //else
+      //     //User === contact
+      //   contact.find().exec(function(err, contacts){
       //     if(err) return next(err);
       //     res.send(contacts);
       //   });
       // });
-      // //   "/user" is the current user, right? So when I try to add a new card, it will be added to the current user id
-      // //therefore, do I need to specify the id?
+
+
+      
+      //   "/user" is the current user, right? So when I try to add a new card, it will be added to the current user id
+      //therefore, do I need to specify the id?
       // app.post('/user/:id/newContact', function(req, res){
       //   var current_user = User.findById(req.params.id);
       //   var user_im_trying_to_save = 
@@ -61,5 +74,5 @@ exports.checkUser = function(req, res, next) {
     return next();
   } else {
     next('User is not logged in.');
-  }
-};
+  } 
+};*/

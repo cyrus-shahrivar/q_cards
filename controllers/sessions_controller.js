@@ -1,8 +1,13 @@
 var mongoose = require('mongoose'),
-    Sessions = require('../models/session.js');
+	passport = require('passport'),
+	express = require('express'),
+	router = express.Router();
+    // Sessions = require('../models/session.js');
 
 
 module.exports.controller = function(app){
 
 
 };
+
+module.exports = router;

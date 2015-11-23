@@ -13,7 +13,7 @@ var CompanySchema = new mongoose.Schema({
   email: {
     type: String,
     trim: true,
-    set: toLower
+    // set: toLower
   },
   phone: {
     type: String,

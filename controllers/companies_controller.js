@@ -1,5 +1,7 @@
 var mongoose = require('mongoose'),
-    Company = require('../models/company.js');
+    Company = require('../models/company.js'),
+    express = require('express'),
+    router = express.Router();
 
 
 module.exports.controller = function(app){
@@ -35,3 +37,5 @@ module.exports.controller = function(app){
 
 
 }
+
+module.exports = router;
