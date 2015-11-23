@@ -23,56 +23,62 @@ var ga = new Company({
     }
 });
 
-var arrayOfUsers = new User({
+var arrayOfUsers = [{
     username: "kyle",
     password: "potatoes",
-    own_card: {
-    //here is a link to QRcode api with link to own card
-      qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
-      name: {first: "Kyle", last: "Gorjanc"},
-      title: "Web developer",
-      company: ga,
-      email: "kyle@gmail.com",
-      phone: "+1(646)500-3425",
-      social_media_links: {
-        url: "www.kyle.com"
-      }
-    },
-    contacts:[]
+    // own_card: {
+    // //here is a link to QRcode api with link to own card
+    //   qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
+    //   firstName:"Kyle",
+    //   lastName: "Gorjanc",
+    //   title: "Web developer",
+    //   company: "565370fb61e13a0705ff6946",
+    //   email: "kyle@gmail.com",
+    //   phone: "+1(646)500-3425",
+    //   social_media_links: {
+    //     url: "www.kyle.com"
+    //   }
+    // },
+    // contacts:[]
 },
   {
     username: "cyrus",
     password: "potatoes",
-    own_card: {
-      qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
-      name: {first: "Cyrus", last: "Shahrivar"},
-      title: "Web developer",
-      company: ga,
-      email: "cyrus@gmail.com",
-      phone: "+1(646)500-6754",
-      social_media_links: {
-        url: "www.cyrus.com"
-      }
-    },
-    contacts: []
+    // own_card: {
+    //   qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
+    //   firstName:"Cyrus",
+    //   lastName: "Shahrivar",
+    //   title: "Web developer",
+    //   company: "565370fb61e13a0705ff6946",
+    //   email: "cyrus@gmail.com",
+    //   phone: "+1(646)500-6754",
+    //   social_media_links: {
+    //     url: "www.cyrus.com"
+    //   }
+    // },
+    // contacts: []
 },
   {
     username: "kate",
     password: "potatoes",
-    own_card: {
-      qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
-      name: {first: "Kate", last: "Shishkina"},
-      title: "Web developer",
-      company: ga,
-      email: "kate@gmail.com",
-      phone: "+1(646)500-1831",
-      social_media_links: {
-        url: "www.kate.com"
-      }
-    },
-    contacts: []
-}
-);
+    // own_card:['3455346465375467546754674567'],
+    // contacts:['35345']
+
+    // own_card: {
+    //   qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
+    //   firstName:"Kate",
+    //   lastName: "Shishkina",
+    //   title: "Web developer",
+    //   company: "565370fb61e13a0705ff6946",
+    //   email: "kate@gmail.com",
+    //   phone: "+1(646)500-1831",
+    //   social_media_links: {
+    //     url: "www.kate.com"
+    //   }
+    // },
+    // contacts: []
+  }
+];
 
 ga.save(function(err){
   if(err){
@@ -82,10 +88,12 @@ ga.save(function(err){
   }
 });
 
-arrayOfUsers.save(function(err){
-    if(err){
-      console.log(err);
-    } else {
-      console.log("saved Kyle, Kate, Cyrus with company GA");
-    }
-});
+User.collection.insert(arrayOfUsers);
+
+// arrayOfUsers.save(function(err){
+//     if(err){
+//       console.log(err);
+//     } else {
+//       console.log("saved Kyle, Kate, Cyrus with company GA");
+//     }
+// });
