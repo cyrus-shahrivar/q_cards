@@ -28,7 +28,7 @@ var initPassport = require('./passport/init');
 initPassport(passport);
 
 //connect to mongo database called qcards_app
-mongoose.connect('mongodb://localhost/qcards_app', function (err) {
+mongoose.connect('mongodb://localhost/q_cards_app', function (err) {
   if(err){
     console.log(err);
   }else {

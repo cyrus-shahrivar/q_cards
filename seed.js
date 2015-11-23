@@ -3,16 +3,17 @@ var Company = require('./models/company.js'),
     mongoose = require('mongoose');
 
 //connect to mongo database
-mongoose.connect('mongodb://localhost//q_cards_app', function(err){
+mongoose.connect('mongodb://localhost/q_cards_app', function (err) {
   if(err){
-    console.log('connection error', err);
-  } else {
-    console.log('connection successful');
+    console.log(err);
+  }else {
+    console.log('connection successful2');
   }
 });
+
 var ga = new Company({
     name: "General Assembly",
-    address: "10 21st Street, NYC"
+    address: "10 21st Street, NYC",
     email: "hello@generalassemb.ly",
     phone: "+1(917)722-0237",
     website: "https://generalassemb.ly",
@@ -22,7 +23,7 @@ var ga = new Company({
     }
 });
 
-var arrayOfUsers = new User([{
+var arrayOfUsers = new User({
     username: "kyle",
     password: "potatoes",
     own_card: {
@@ -43,6 +44,7 @@ var arrayOfUsers = new User([{
     username: "cyrus",
     password: "potatoes",
     own_card: {
+      qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
       name: {first: "Cyrus", last: "Shahrivar"},
       title: "Web developer",
       company: ga,
@@ -58,6 +60,7 @@ var arrayOfUsers = new User([{
     username: "kate",
     password: "potatoes",
     own_card: {
+      qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
       name: {first: "Kate", last: "Shishkina"},
       title: "Web developer",
       company: ga,
@@ -69,8 +72,17 @@ var arrayOfUsers = new User([{
     },
     contacts: []
 }
-]);
-  arrayOfUsers.save(function(err){
+);
+
+ga.save(function(err){
+  if(err){
+    console.log(err);
+  } else {
+    console.log("ga saved");
+  }
+});
+
+arrayOfUsers.save(function(err){
     if(err){
       console.log(err);
     } else {
