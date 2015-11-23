@@ -32,13 +32,13 @@ var startSessionAndGetProfile = function() {
   // var username = $("#username-login").val();
   // var password = $("#password-login").val();
   // console.log(username, password);
-  $.ajax({
-   url: '/users/',
-   method: 'GET',
-   dataType: 'json'
- }).done(function (someuser) {
-   console.log(someuser);
- });
+ //  $.ajax({
+ //   url: '/users/',
+ //   method: 'GET',
+ //   dataType: 'json'
+ // }).done(function (someuser) {
+ //   console.log(someuser);
+ // });
   $("#app-body").empty();
   var appBody = $('#app-body');
   var profileScreen = Handlebars.compile($("#profile-screen").html());
@@ -59,16 +59,29 @@ var getSettings = function () {
 
 // Utilize for getting profile pages and posting settings form / registration form information.
 var getProfileAndPostSettings = function() {
-  // var username = $("#username").val();
-  // var password = $("#password").val();
-  // var name = $("#name").val();
-  // var phone = $("#phone").val();
-  // var email = $("#email").val();
-  // var company = $("#company").val();
-  // var companyAddress = $("#company-address").val();
-  // var companyLogo = $("#company-logo-url").val();
-  // var socialMedia = $("#social-media").val();
+  //create an object , make it dry
+  var firstName = $("#firstName").val();
+  var lastName = $("#lastName").val();
+  var password = $("#password").val();
+  var username = $("#username").val();
+  var phone = $("#phone").val();
+  var email = $("#email").val();
+  var company = $("#company").val();
+  var companyAddress = $("#company-address").val();
+  var companyLogo = $("#company-logo-url").val();
+  var socialMedia = $("#social-media").val();
   // console.log(username + password + name + phone + email + company + companyAddress + companyLogo + socialMedia);
+  $.post('/users/', {
+    username: username,
+    password: password,
+    firstName: firstName,
+    lastName: lastName,
+    phone: phone,
+    company: company,
+    socialMedia: socialMedia
+  }).done(function () {
+    console.log("hi, i worked a post whoo oohosdfoa;kdf"+username+password);
+  });
   $("#app-body").empty();
   var appBody = $('#app-body');
   var profileScreen = Handlebars.compile($("#profile-screen").html());
