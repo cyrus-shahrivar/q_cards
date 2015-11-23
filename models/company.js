@@ -1,11 +1,29 @@
 var mongoose = require('mongoose');
 
 var CompanySchema = new mongoose.Schema({
-  name: String,
-  address: String,
-  email: String,
-  phone: String,
-  website: String,
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  address: {
+    type: String,
+    trim: true
+  },
+  email: {
+    type: String,
+    trim: true,
+    set: toLower
+  },
+  phone: {
+    type: String,
+    trim: true
+  },
+  website: {
+    type: String,
+    required: true,
+    trim: true
+  },
   logo: String,
   social_media_links: Array
 });
