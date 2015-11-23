@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 module.exports.controller = function(app){
       app.get('/users', function(req, res) {
-        User.find().populate('posts').exec(function (err, users) {
+        User.find().exec(function (err, users) {
           res.send(users);
         });
       });

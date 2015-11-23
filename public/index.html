@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-<!-- The Html will need to be updated to reflect the database fields structure and add in handlebars tags. This is an initial shot. -->
-
-
+  <!-- The Html will need to be updated to reflect the database fields structure and add in handlebars tags. This is an initial shot. -->
   <head>
     <meta charset="utf-8">
     <!-- auto-scales the website to help with mobile friendliness -->
@@ -11,25 +8,24 @@
     <title>Qcards</title>
     <!-- css and javascript references (note: may need to change for production to non-bower links) -->
     <link rel="stylesheet" href="./css/stylesheet.css">
-  	<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="../bower_components/handlebars/handlebars.js"></script>
     <script type="text/javascript" src="./js/app.js"></script>
   </head>
   <body>
-  <!-- master-container is the container for all the body elements.  It provides a way for controlling the mobile-first size for all other elements within it. -->
-  <div id="master-container">
-    <!-- Header contains the logo and the add card + sign. -->
-    <header>
-      <img src="./images/Qcards1.png" alt="logo" id="logo"/><span id="add-card">+</span>
-    </header>
-    <!-- This code may be useful for triggering the camera on smart phones -->
-    <!-- <input type="file" capture="camera" accept="image/*" id="cameraInput" name="cameraInput"> -->
-
-    <!-- app-body ise the div that handlebars uses to attach handlebars templates to.  -->
-    <div id="app-body"></div>
-
-    <!-- home-screen displays the username and password login fields.  It has two buttons: one for login, one for sign up. -->
-    <template id="home-screen">
+    <!-- master-container is the container for all the body elements.  It provides a way for controlling the mobile-first size for all other elements within it. -->
+    <div id="master-container">
+      <!-- Header contains the logo and the add card + sign. -->
+      <header>
+        <img src="./images/Qcards1.png" alt="logo" id="logo"/><span id="add-card">+</span>
+      </header>
+      <!-- This code may be useful for triggering the camera on smart phones -->
+      <!-- <input type="file" capture="camera" accept="image/*" id="cameraInput" name="cameraInput"> -->
+      <!-- app-body ise the div that handlebars uses to attach handlebars templates to.  -->
+      <div id="app-body"></div>
+      <!-- home-screen displays the username and password login fields.  It has two buttons: one for login, one for sign up. -->
+      <template id="home-screen">
+      <div id="login-form">
       <p>
         <input type="text" placeholder="Username" name="name" id="username-login">
       </p>
@@ -42,21 +38,20 @@
       <p>
         <button type="button" name="button" id="sign-up-button">Sign Up!</button>
       </p>
-    </template>
-
-    <!-- profile-screen has the QR code for the user and a button to see the user's collected business cards-->
-    <template id="profile-screen">
+      </div>
+      </template>
+      <!-- profile-screen has the QR code for the user and a button to see the user's collected business cards-->
+      <template id="profile-screen">
       <img src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="QRCode" id="QRCode"/>
       <p>
         < Name's Business Card >
       </p>
       <p>
-      <button type="button" name="button" id="my-cards">Go to My Cards</button>
+        <button type="button" name="button" id="my-cards">Go to My Cards</button>
       </p>
-    </template>
-
-    <!-- settings-screen has all the fields for registering a new user or updating user information -->
-    <template id="settings-screen">
+      </template>
+      <!-- settings-screen has all the fields for registering a new user or updating user information -->
+      <template id="settings-screen">
       <div id="settings-container">
         <p><input type="text" placeholder="Username" name="username" id="username"></p>
         <p><input type="password" placeholder="Password" name="password" id="password"></p>
@@ -69,10 +64,9 @@
         <p><input type="text" placeholder="Social Media URLs (Separate By Commas)" name="seach" id="social-media"></p>
         <p><button type="button" name="button" id="update-account">Update Account</button></p>
       </div>
-    </template>
-
-    <!-- contacts-screen has a search bar and all collected cards within -->
-    <template id="contacts-screen">
+      </template>
+      <!-- contacts-screen has a search bar and all collected cards within -->
+      <template id="contacts-screen">
       <p>
         <input type="search" placeholder="Find a contact" name="search" id="find-name">
         <button type="button" name="button" id="search">Search</button>
@@ -86,34 +80,32 @@
         <p>Email</p>
         <p>Social Media</p>
       </div>
-    </template>
-
-    <!-- about-screen has a short blurb about the purpose of the website  -->
-    <template id="about-screen">
+      </template>
+      <!-- about-screen has a short blurb about the purpose of the website  -->
+      <template id="about-screen">
       <h2>About Us</h2>
       <p>
         Welcome to QCards! QCards is the ultimate website for your business card needs.  Our mission is to reduce the paper clutter in this world, in your wallets, and for some of you, in your Rolodexes, by providing to you a simple to use business card QR code scanner and business contacts list.
       </p>
-    </template>
-
-    <!-- footer has the navigation tab bar and copyright that appears at the bottom of all pages -->
-    <footer>
-      <div class="nav">
-        <div class="navbox">
-          <span id="profile-link">&#128100;<br>My Profile</span>
+      </template>
+      <!-- footer has the navigation tab bar and copyright that appears at the bottom of all pages -->
+      <footer>
+        <div class="nav">
+          <div class="navbox">
+            <span id="profile-link">&#128100;<br>My Profile</span>
+          </div>
+          <div class="navbox">
+            <span id="contacts-link">&#128199;<br>Contacts</span>
+          </div>
+          <div class="navbox">
+            <span id="settings-link">&#9881;&#9881;&#9881;<br>Settings</span>
+          </div>
+          <div class="navbox">
+            <span id="about-link">&#8263;<br>About Us</span>
+          </div>
         </div>
-        <div class="navbox">
-          <span id="contacts-link">&#128199;<br>Contacts</span>
-        </div>
-        <div class="navbox">
-          <span id="settings-link">&#9881;&#9881;&#9881;<br>Settings</span>
-        </div>
-        <div class="navbox">
-          <span id="about-link">&#8263;<br>About Us</span>
-        </div>
-      </div>
-      <div id="copyright">&copy; Qcards 2015</div>
-    </footer>
-  </div>
+        <div id="copyright">&copy; Qcards 2015</div>
+      </footer>
+    </div>
   </body>
 </html>
