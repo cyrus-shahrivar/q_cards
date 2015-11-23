@@ -4,6 +4,7 @@ var express = require('express'),
     passport = require('passport'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
+    bcrypt = require('bcrypt'),
     router = express.Router(),
     fs = require('fs'),
     companies = require('./controllers/companies_controller.js'),
@@ -25,9 +26,6 @@ app.use(passport.session());
 // Initialize Passport
 var initPassport = require('./passport/init');
 initPassport(passport);
-
-var routes = require('./routes/index')(passport);
-app.use('/', routes);
 
 //connect to mongo database called qcards_app
 mongoose.connect('mongodb://localhost/qcards_app', function (err) {
@@ -52,7 +50,7 @@ app.use('/', companies);
 // THIS IS CAUSING A BUG. FOR SOME REASON THE SERVER ISN'T FINDING './controllers/:file'
 // fs.readdirSync('./controllers').forEach(function(file) {
 //   if (file.substr(-3) == '.js') {
-//     // route = require('./controllers/' + file);
+//     route = require('./controllers/' + file) (passport);
 //     route.controller(app);
 //   }
 // });
