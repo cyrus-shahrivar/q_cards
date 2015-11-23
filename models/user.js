@@ -9,47 +9,45 @@ var UserSchema = new mongoose.Schema({
   username: String,
   password: String,
 //own_card is an array of objects that displays a user's own contact information. The basic contact information is required, to prevent users from making cards that aren't useful from a networking perspective.
-  own_card: {
-    //the qr code will be a url: the location of the qr code image.
-    qr_code: String,
-    name: {
-      first: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    last: {
-      type: String,
-      required: true,
-      trim: true
-    }
-    },
-    //we also need to VERIFY the email, to make sure the user is real and contactable, and need to check the validity against a regex.
-    email: {
-      type: String,
-      required: true,
-      trim: true},
-    //we also need to take in the phone number in a particular format, process it into a simple string of numbers, then render it back out in our chosen format (ie: countryCode-(areaCode) exchange-lineNumber would spit out 9-(999) 999-9999 or countryCode.areaCode.exchange.lineNumber would perhaps be more internationally friendly, giving us 9.999.999.9999)
-    phone: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    title: String,
-//referencing Company Object
-    company: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Company'
-    },
-    social_media_links: {
-      url: String
-    }
-  },
-//the contacts list is a list of other users whose cards the user has chosen to add to her "virtual rolodex"
-  contacts: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
+//   own_card: {
+//     //the qr code will be a url: the location of the qr code image.
+//     qr_code: String,
+//     firstName: {
+//       type: String,
+//       required: true,
+//       trim: true
+//     },
+//     lastName: {
+//       type: String,
+//       required: true,
+//       trim: true
+//     },
+//     //we also need to VERIFY the email, to make sure the user is real and contactable, and need to check the validity against a regex.
+//     email: {
+//       type: String,
+//       required: true,
+//       trim: true},
+//     //we also need to take in the phone number in a particular format, process it into a simple string of numbers, then render it back out in our chosen format (ie: countryCode-(areaCode) exchange-lineNumber would spit out 9-(999) 999-9999 or countryCode.areaCode.exchange.lineNumber would perhaps be more internationally friendly, giving us 9.999.999.9999)
+//     phone: {
+//       type: String,
+//       //required: true,
+//       trim: true
+//     },
+//     title: String,
+// //referencing Company Object
+//     company: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: 'Company'
+//     },
+//     social_media_links: {
+//       url: String
+//     }
+//   },
+// //the contacts list is a list of other users whose cards the user has chosen to add to her "virtual rolodex"
+//   contacts: [{
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'User'
+//   }],
 });
 
 ///////////////  HOOK ///////////////////
