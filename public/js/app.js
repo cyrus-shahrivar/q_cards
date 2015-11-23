@@ -32,6 +32,13 @@ var startSessionAndGetProfile = function() {
   // var username = $("#username-login").val();
   // var password = $("#password-login").val();
   // console.log(username, password);
+  $.ajax({
+   url: '/users/',
+   method: 'GET',
+   dataType: 'json'
+ }).done(function (someuser) {
+   console.log(someuser);
+ });
   $("#app-body").empty();
   var appBody = $('#app-body');
   var profileScreen = Handlebars.compile($("#profile-screen").html());
