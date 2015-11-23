@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    CompanySchema = require('./company.js');
+    CompanySchema = require('./company.js'),
+    bcrypt = require('bcrypt');
 /*
 User object has two components: my_card - public profile to share the QR code with others users, and
 all the information of the user for the settings view, so he can update the information, including the password
@@ -11,15 +12,17 @@ var UserSchema = new mongoose.Schema({
   own_card: {
     //the qr code will be a url: the location of the qr code image.
     qr_code: String,
-    firstName: {
+    name: {
+      first: {
       type: String,
       required: true,
       trim: true
     },
-    lastName: {
+    last: {
       type: String,
       required: true,
       trim: true
+    }
     },
     //we also need to VERIFY the email, to make sure the user is real and contactable, and need to check the validity against a regex.
     email: {
@@ -38,10 +41,9 @@ var UserSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Company'
     },
-    links: [
-      {linkedin_url: String},
-      {personal_url: String}
-    ]
+    social_media_links: {
+      url: String
+    }
   },
 //the contacts list is a list of other users whose cards the user has chosen to add to her "virtual rolodex"
   contacts: [{
