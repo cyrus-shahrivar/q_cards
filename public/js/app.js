@@ -1,4 +1,8 @@
+// Ajax calls and database info displaying still need to be added.
+
+
 $(function () {
+  // Displays the login screen on startup.
   var appLaunch = function () {
     var appBody = $('#app-body');
     var homeScreen = Handlebars.compile($("#home-screen").html());
@@ -6,6 +10,8 @@ $(function () {
   };
 
   appLaunch();
+
+  // Below are the event listeners within the document ready function.
 
   $("#app-body").on('click', "#login-button", startSessionAndGetProfile);
   $("#app-body").on('click', "#sign-up-button", getSettings);
@@ -20,6 +26,7 @@ $(function () {
   $("footer").on('click', "#settings-link", getSettings);
 });
 
+// Utilize for starting user session and getting QR code profile page.
 var startSessionAndGetProfile = function() {
   // console.log("login-button is working");
   // var username = $("#username-login").val();
@@ -31,6 +38,7 @@ var startSessionAndGetProfile = function() {
   appBody.append(profileScreen);
 };
 
+// Utilize for getting sign-up / settings page.
 var getSettings = function () {
   // console.log("sign up button is working");
   // var username = $("#username-login").val();
@@ -42,13 +50,25 @@ var getSettings = function () {
   appBody.append(settingsScreen);
 };
 
+// Utilize for getting profile pages and posting settings form / registration form information.
 var getProfileAndPostSettings = function() {
+  // var username = $("#username").val();
+  // var password = $("#password").val();
+  // var name = $("#name").val();
+  // var phone = $("#phone").val();
+  // var email = $("#email").val();
+  // var company = $("#company").val();
+  // var companyAddress = $("#company-address").val();
+  // var companyLogo = $("#company-logo-url").val();
+  // var socialMedia = $("#social-media").val();
+  // console.log(username + password + name + phone + email + company + companyAddress + companyLogo + socialMedia);
   $("#app-body").empty();
   var appBody = $('#app-body');
   var profileScreen = Handlebars.compile($("#profile-screen").html());
   appBody.append(profileScreen);
 };
 
+// Utilize to get about page.
 var getAboutScreen = function () {
   $("#app-body").empty();
   var appBody = $('#app-body');
@@ -56,6 +76,7 @@ var getAboutScreen = function () {
   appBody.append(aboutScreen);
 };
 
+// Utilize for getting my cards page.
 var getMyCards = function() {
   $("#app-body").empty();
   var appBody = $('#app-body');
@@ -70,26 +91,9 @@ var getProfile = function() {
   appBody.append(profileScreen);
 };
 
-
+// Utilize for getting search field info and performing search.
 
 // var searchContacts = function () {
 //   var name = $("#find-name").val()
 //   console.log(name);
-// }
-
-// var postSettings = function () {
-//   var username = $("#username").val();
-//   var password = $("#password").val();
-//   var name = $("#name").val();
-//   var phone = $("#phone").val();
-//   var email = $("#email").val();
-//   var company = $("#company").val();
-//   var companyAddress = $("#company-address").val();
-//   var companyLogo = $("#company-logo-url").val();
-//   var socialMedia = $("#social-media").val();
-//   console.log(username + password + name + phone + email + company + companyAddress + companyLogo + socialMedia);
-//   $("#app-body").empty();
-//   var appBody = $('#app-body');
-//   var profileScreen = Handlebars.compile($("#profile-screen").html());
-//   appBody.append(profileScreen);
 // }
