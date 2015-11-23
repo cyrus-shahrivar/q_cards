@@ -22,6 +22,13 @@ app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Initialize Passport
+var initPassport = require('./passport/init');
+initPassport(passport);
+
+var routes = require('./routes/index')(passport);
+app.use('/', routes);
+
 //connect to mongo database called qcards_app
 mongoose.connect('mongodb://localhost/qcards_app', function (err) {
   if(err){
