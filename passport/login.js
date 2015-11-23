@@ -16,7 +16,7 @@ module.exports = function(passport){
                         return done(err);
                     // Username does not exist, log the error and redirect back
                     if (!user){
-                        console.log('User Not Found with username '+username);
+                        console.log('User Not Found with username ' + username);
                         return done(null, false, req.flash('message', 'User Not found.'));                 
                     }
                     // User exists but wrong password, log the error 
@@ -39,3 +39,5 @@ module.exports = function(passport){
     }
     
 }
+
+//Code shamelessly copied over from http://code.tutsplus.com/tutorials/build-a-complete-mvc-website-with-expressjs--net-34168.  I went through it with a fine-tooth comb to ensure its compatibility with our code. -KMG

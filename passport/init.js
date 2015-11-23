@@ -22,3 +22,7 @@ module.exports = function(passport){
     signup(passport);
 
 }
+
+
+
+//Code shamelessly copied over from http://code.tutsplus.com/tutorials/build-a-complete-mvc-website-with-expressjs--net-34168.  I went through it with a fine-tooth comb to ensure its compatibility with our code. -KMG
