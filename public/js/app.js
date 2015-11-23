@@ -1,32 +1,99 @@
+// Ajax calls and database info displaying still need to be added.
+
+
 $(function () {
-  $("#login-button").on('click', startSessionAndGetProfile);
-  $("#sign-up-button").on('click', getSettings);
-  $("#update-account").on('click', postSeetings);
+  // Displays the login screen on startup.
+  var appLaunch = function () {
+    var appBody = $('#app-body');
+    var homeScreen = Handlebars.compile($("#home-screen").html());
+    appBody.prepend(homeScreen);
+  };
+
+  appLaunch();
+
+  // Below are the event listeners within the document ready function.
+
+  $("#app-body").on('click', "#login-button", startSessionAndGetProfile);
+  $("#app-body").on('click', "#sign-up-button", getSettings);
+  $("#app-body").on('click', "#update-account", getProfileAndPostSettings);
+  $("#app-body").on('click', "#my-cards", getMyCards);
+
+  // $("#app-body").on('click', "#search", searchContacts);
+
+  $("footer").on('click', "#about-link", getAboutScreen);
+  $("footer").on('click', "#profile-link", getProfile);
+  $("footer").on('click', "#contacts-link", getMyCards);
+  $("footer").on('click', "#settings-link", getSettings);
 });
 
-var startSessionAndGetProfile = function(){
-  console.log("login-button is working");
-  var username = $("#username-login").val();
-  var password = $("#password-login").val();
-  console.log(username, password);
-}
+// Utilize for starting user session and getting QR code profile page.
+var startSessionAndGetProfile = function() {
+  // console.log("login-button is working");
+  // var username = $("#username-login").val();
+  // var password = $("#password-login").val();
+  // console.log(username, password);
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var profileScreen = Handlebars.compile($("#profile-screen").html());
+  appBody.append(profileScreen);
+};
 
+// Utilize for getting sign-up / settings page.
 var getSettings = function () {
-  console.log("sign up button is working");
-  var username = $("#username-login").val();
-  var password = $("#password-login").val();
-  console.log(username, password);
-}
+  // console.log("sign up button is working");
+  // var username = $("#username-login").val();
+  // var password = $("#password-login").val();
+  // console.log(username, password);
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var settingsScreen = Handlebars.compile($("#settings-screen").html());
+  appBody.append(settingsScreen);
+};
 
-var postSeetings = function () {
-  var username = $("#username").val();
-  var password = $("#password").val();
-  var name = $("#name").val();
-  var phone = $("#phone").val();
-  var email = $("#email").val();
-  var company = $("#company").val();
-  var companyAddress = $("#company-address").val();
-  var companyLogo = $("#company-logo-url").val();
-  var socialMedia = $("#social-media").val();
-  console.log(username + password + name + phone + email + company + companyAddress + companyLogo + socialMedia);
-}
+// Utilize for getting profile pages and posting settings form / registration form information.
+var getProfileAndPostSettings = function() {
+  // var username = $("#username").val();
+  // var password = $("#password").val();
+  // var name = $("#name").val();
+  // var phone = $("#phone").val();
+  // var email = $("#email").val();
+  // var company = $("#company").val();
+  // var companyAddress = $("#company-address").val();
+  // var companyLogo = $("#company-logo-url").val();
+  // var socialMedia = $("#social-media").val();
+  // console.log(username + password + name + phone + email + company + companyAddress + companyLogo + socialMedia);
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var profileScreen = Handlebars.compile($("#profile-screen").html());
+  appBody.append(profileScreen);
+};
+
+// Utilize to get about page.
+var getAboutScreen = function () {
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var aboutScreen = Handlebars.compile($("#about-screen").html());
+  appBody.append(aboutScreen);
+};
+
+// Utilize for getting my cards page.
+var getMyCards = function() {
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var myCardsScreen = Handlebars.compile($("#contacts-screen").html());
+  appBody.append(myCardsScreen);
+};
+
+var getProfile = function() {
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var profileScreen = Handlebars.compile($("#profile-screen").html());
+  appBody.append(profileScreen);
+};
+
+// Utilize for getting search field info and performing search.
+
+// var searchContacts = function () {
+//   var name = $("#find-name").val()
+//   console.log(name);
+// }
