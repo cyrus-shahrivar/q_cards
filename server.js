@@ -1,6 +1,7 @@
 var express = require('express'),
     logger = require('morgan'),
     session = require('express-session'),
+    passport = require('passport'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     router = express.Router(),
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use('/bower_components/', express.static(__dirname + '/bower_components/'));
 app.use(session);
+app.use(passport.initialize());
+app.use(passport.session());
 
 //connect to mongo database called qcards_app
 mongoose.connect('mongodb://localhost/qcards_app', function (err) {
