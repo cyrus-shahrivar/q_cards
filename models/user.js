@@ -11,10 +11,6 @@ all the information of the user for the settings view, so he can update the info
 var UserSchema = new mongoose.Schema({
   username: String,
   password: String,
-  businesCard: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'BusinessCardInfo'
-  }],
 //the contacts list is a list of other users whose cards the user has chosen to add to her "virtual rolodex"
   contacts: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -48,8 +44,9 @@ var UserSchema = new mongoose.Schema({
      title: String,
      //referencing Company Object
      company: {
-       type: mongoose.Schema.Types.ObjectId,
-       ref: 'Company'
+       type: String,
+       required: true,
+       trim: true
      },
      social_media_links: {
        url: String
