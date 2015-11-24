@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
     CompanySchema = require('./company.js'),
+    BusinessCardInfo = require('./businessCardInfo.js'),
     bcrypt = require('bcrypt');
 /*
 User object has two components: my_card - public profile to share the QR code with others users, and
@@ -8,6 +9,10 @@ all the information of the user for the settings view, so he can update the info
 var UserSchema = new mongoose.Schema({
   username: String,
   password: String,
+  businesCard: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'BusinessCardInfo'
+  }],
 //the contacts list is a list of other users whose cards the user has chosen to add to her "virtual rolodex"
   contacts: [{
     type: mongoose.Schema.Types.ObjectId,

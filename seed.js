@@ -40,23 +40,38 @@ var arrayOfCompanies = [{
 var arrayOfUsers = [{
     username: "kyle",
     password: "potatoes",
+    //i want to add business card which matches this user, but how?
+    //to do this, you would either have to do callback hell or a recursive function
+    //or take a portion of the form from html and put it in user, and take a bit and put in business card info
+    //and then you would have to have them reference each other somehow
+    //i actually think the way we did it before is better because it is in keeping with
+    //mongo structure (i.e. non-relational)
+    //so if you want a subset of info, you just call that form the JSON object
+    //there isn't a complex web of relationships unless necessary
+    //even company doesn't necessarily have to be a model as you can iterate over
+    //all users and determine which companies they work for
+    //it is up to each user to make sure their data is consistent
+    //facebook and others make recommendations as to what to fill out in your fields probably to create consistency across users
+    //without using relational databases
+    //relationships at time of creation are not natural for mongo
+    businesCard:['3455346465375467546754674567'],
     contacts:[]
 },
   {
     username: "cyrus",
     password: "potatoes",
+    businesCard:['3455346465375467546754674567'],
     contacts: []
 },
   {
     username: "kate",
     password: "potatoes",
-    // own_card:['3455346465375467546754674567'],
-    // contacts:['35345']
+    businesCard:['3455346465375467546754674567'],
     contacts: []
   }
 ];
 
-var arrayOfCardInfo= [{
+var arrayOfCardInfo = [{
     qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
     firstName:"Kyle",
     lastName: "Gorjanc",
