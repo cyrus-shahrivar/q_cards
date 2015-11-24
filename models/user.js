@@ -20,6 +20,26 @@ var UserSchema = new mongoose.Schema({
   }],
 });
 
+// UserSchema.methods.addBusinessCard = function(req, res) {
+//   var user = this;
+//   var businesCard = new BusinessCardInfo(req.body);
+//   businesCard.save(function(err) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       user.businesCard.push(businesCard._id);
+//       user.save(function(err) {
+//         if (err) {
+//           console.log(err);
+//         } else {
+//           console.log(user.username + " saved");
+//           res.send(user);
+//         }
+//       });
+//     }
+//   });
+// }
+
 ///////////////  HOOK ///////////////////
 //this is a 'hook'. It says, 'do this function before you save!'
 
