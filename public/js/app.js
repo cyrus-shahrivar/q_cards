@@ -2,11 +2,16 @@
 
 
 $(function () {
-  // Displays the login screen on startup.
+  // Displays the login template on startup.
   var appLaunch = function () {
     var appBody = $('#app-body');
-    var homeScreen = Handlebars.compile($("#home-screen").html());
-    appBody.prepend(homeScreen);
+    var loginScreen = Handlebars.compile($("#login-template").html());
+    var profileScreen = Handlebars.compile($("#profile-template").html());
+    // if (loggedIn() === true) {
+    //   appBody.prepend(profileScreen);
+    // } else {
+      appBody.prepend(loginScreen);
+    // }
   };
 
   appLaunch();
@@ -24,6 +29,14 @@ $(function () {
   $("footer").on('click', "#profile-link", getProfile);
   $("footer").on('click', "#contacts-link", getMyCards);
   $("footer").on('click', "#settings-link", getSettings);
+
+
+  $("header").on('click', "#header-logo", getProfile);
+  $("header").on('click', "#add-card", newCard);
+
+  // // Username link click
+  // $('#contacts-screen').on('load', 'td a.linkshowuser', renderContacts);
+
 });
 
 // Utilize for starting user session and getting QR code profile page.
@@ -41,7 +54,7 @@ var startSessionAndGetProfile = function() {
  // });
   $("#app-body").empty();
   var appBody = $('#app-body');
-  var profileScreen = Handlebars.compile($("#profile-screen").html());
+  var profileScreen = Handlebars.compile($("#profile-template").html());
   appBody.append(profileScreen);
 };
 
@@ -52,7 +65,7 @@ var getSettings = function () {
   console.log(username, password);
   $("#app-body").empty();
   var appBody = $('#app-body');
-  var settingsScreen = Handlebars.compile($("#settings-screen").html());
+  var settingsScreen = Handlebars.compile($("#settings-template").html());
   console.log("sign up button is working");
   console.log(username, password);
   appBody.append(settingsScreen);
@@ -85,7 +98,7 @@ var getProfileAndPostSettings = function() {
   });
   $("#app-body").empty();
   var appBody = $('#app-body');
-  var profileScreen = Handlebars.compile($("#profile-screen").html());
+  var profileScreen = Handlebars.compile($("#profile-template").html());
   appBody.append(profileScreen);
   console.log(username, firstName);
 };
@@ -94,7 +107,7 @@ var getProfileAndPostSettings = function() {
 var getAboutScreen = function () {
   $("#app-body").empty();
   var appBody = $('#app-body');
-  var aboutScreen = Handlebars.compile($("#about-screen").html());
+  var aboutScreen = Handlebars.compile($("#about-template").html());
   appBody.append(aboutScreen);
 };
 
@@ -102,16 +115,48 @@ var getAboutScreen = function () {
 var getMyCards = function() {
   $("#app-body").empty();
   var appBody = $('#app-body');
-  var myCardsScreen = Handlebars.compile($("#contacts-screen").html());
+  var myCardsScreen = Handlebars.compile($("#contacts-template").html());
   appBody.append(myCardsScreen);
 };
 
 var getProfile = function() {
   $("#app-body").empty();
   var appBody = $('#app-body');
-  var profileScreen = Handlebars.compile($("#profile-screen").html());
+  var profileScreen = Handlebars.compile($("#profile-template").html());
   appBody.append(profileScreen);
 };
+
+
+var newCard = function() {
+  $("#app-body").empty();
+  var appBody = $('#app-body');
+  var scanScreen = Handlebars.compile($("#scan-card-template").html());
+  // var scanCard = $('<input>').attr('type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"')
+  appBody.append(scanScreen);
+};
+
+
+//The following is redundant - handlebars takes care of it.
+//GET THE ARRAY POSITION OF EACH CONTACT
+// var renderContacts = function() {
+//   contacts =
+//   Users.each(){
+//     event.preventDefault();
+//     var thisContact = $(this);
+//     var arrayPosition = contactListData.map(function(arrayItem) { return arrayItem.username; }).indexOf(thisContact);
+//     //GET OUR CONTACTS
+//     var thisContactObject = contacts[arrayPosition];
+
+//     //Populate the cards
+//     $('#contact-firstName').text(thisContactObject.firstName);
+//     $('#contact-lastName').text(thisContactObject.lastName);
+//     $('#contact-email').text(thisContactObject.email);
+//     $('#contact-phone').text(thisContactObject.phone);
+//     $('#contact-company').text(thisContactObject.company);
+//     $('#contact-logo').text(thisContactObject.company.logo-url);
+//     $('#contact-title').text(thisContactObject.title);
+//   }
+// };
 
 // Utilize for getting search field info and performing search.
 

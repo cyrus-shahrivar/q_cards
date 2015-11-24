@@ -6,6 +6,8 @@
     <!-- auto-scales the website to help with mobile friendliness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qcards</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic' rel='stylesheet' type='text/css'>
     <!-- css and javascript references (note: may need to change for production to non-bower links) -->
     <link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="./css/stylesheet.css">
@@ -26,10 +28,10 @@
       
       <!-- app-body ise the div that handlebars uses to attach handlebars templates to.  -->
       <div id="app-body"></div>
-      <!-- home-screen displays the username and password login fields.  It has two buttons: one for login, one for sign up. -->
-      <template id="home-screen">
+      <!-- login-template displays the username and password login fields.  It has two buttons: one for login, one for sign up. -->
+      <template id="login-template">
       <div class="page" id="login-form">
-      <img src="./images/Qcards-black.png" alt="logo" id="home-logo"/>
+      <img src="./images/Qcards-black.png" alt="logo" id="login-logo"/>
       <p>
         <input type="text" class="input" placeholder="Username" name="name" id="username-login">
       </p>
@@ -45,31 +47,34 @@
       </div>
       </template>
 
-      <!-- profile-screen has the QR code for the user and a button to see the user's collected business cards-->
-      <template id="profile-screen">
+      <!-- profile-template has the QR code for the user and a button to see the user's collected business cards-->
+      <template id="profile-template">
       <div class="page">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="QRCode" id="QRCode"/>
-      <p>
-        {{User.username}}'s Business Card
-      </p>
-      <p>
-        <button type="button" name="button" id="my-cards">View My Contacts</button>
+      <h2>{{User.username}}Joe McJosephson</h2>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=400x400" alt="QRCode" id="QRCode"/><br>
         <div class="card" id="my-card">
           <div class="card-contents">
-            <img src="{{User.company.logo}}" alt="{{User.company}} logo" id="company-logo-img"/>
-            <p>{{user.name}}name</p>
-            <p>{{User.email}}email</p>
-            <p>{{User.phone}}phone</p>
-            <p>{{Phone}}</p>
-            <p>{{Email}}</p>
-            <p>{{links}}</p>
+            <div id="name">firstName lastName</div>
+            <div id="title">title</div>
+            <div id="phone">phone</div>
+            <div id="email">email</div>
+            <div id="company">company</div>
+            <div id="logo"><img src="" alt="logo" id="this.company.logo"/></div>
+            <div id="url">personal-url</div>
+            <ul id="links">
+              {{#each links}}
+                <li><a href="url">location</a></li>
+              {{/each}}
+            </ul>
           </div>
         </div>
-      </p>
       </div>
       </template>
-      <!-- settings-screen has all the fields for registering a new user or updating user information -->
-      <template id="settings-screen">
+
+
+
+      <!-- settings-template has all the fields for registering a new user or updating user information -->
+      <template id="settings-template">
       <div class="page" id="settings-container">
         <p><input type="text" placeholder="Username" name="username" id="username"></p>
         <p><input type="password" placeholder="Password" name="password" id="password"></p>
@@ -84,8 +89,11 @@
         <p><button type="button" name="button" id="update-account">Update Account</button></p>
       </div>
       </template>
-      <!-- contacts-screen has a search bar and all collected cards within -->
-      <template id="contacts-screen">
+
+
+
+ <!-- contacts-template has a search bar and all collected cards within -->
+      <template id="contacts-template">
       <div class="page">
         <p>
           <input type="search" placeholder="Find a contact" name="search" id="find-name">
@@ -93,27 +101,52 @@
         </p>
         <div class="card" id="contact">
           <div class="card-contents">
-            <p>Name</p>
-            <p>Company</p>
-            <img src="" alt="logo" id="company-logo-img"/>
-            <p>Address</p>
-            <p>Phone</p>
-            <p>Email</p>
-            <p>Social Media</p>
+          {{#each contacts}}
+            <div id="name">firstName lastName</div>
+            <div id="title">title</div>
+            <div id="phone">phone</div>
+            <div id="email">email</div>
+            <div id="company">company</div>
+            <div id="logo"><img src="" alt="logo" id="this.company.logo"/></div>
+            <div id="url">personal-url</div>
+            <ul id="links">
+              {{#each links}}
+                <li><a href="url">location</a></li>
+              {{/each}}
+            </ul>
+            {{/each}}
           </div>
         </div>
       </div>
       </template>
-      <!-- about-screen has a short blurb about the purpose of the website  -->
-      <template id="about-screen">
-      <div class="page">
-        <h2>About Us</h2>
+
+
+
+      <!-- about-template has a short blurb about the purpose of the website  -->
+      <template id="about-template">
+      <div class="page" id="about-page">
+        <h2>About</h2>
         <p>
-          Welcome to QCards! QCards is the ultimate website for your business card needs.  Our mission is to reduce the paper clutter in this world, in your wallets, and for some of you, in your Rolodexes, by providing to you a simple to use business card QR code scanner and business contacts list.
+          Qcards replaces your business card with a simple QR code, scannable by other Qcarders. It is designed to give professionals a fast and convenient way to trade and track business contacts without disintegrating in a pocket, winding up in the trash bin or getting lost among personal contacts in your phone.</p>
+        <br>
+        <p>Our mission is to reduce paper clutter in your wallet, your washing machine and in our world, one scan at a time.
         </p>
       </div>
       </template>
-      <!-- footer has the navigation tab bar and copyright that appears at the bottom of all pages -->
+
+
+<!-- scan-card-template will scan a new card -->
+      <template id="scan-card-template">
+        <div class="page">
+          <h2>SCAN</h2>
+          <!-- This code may be useful for triggering the camera on smart phones -->
+          <input type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact">
+        </div>
+      </template>
+     
+
+
+<!-- footer has the navigation tab bar and copyright that appears at the bottom of all pages -->
       <footer>
         <div class="nav">
           <div class="navbox">
