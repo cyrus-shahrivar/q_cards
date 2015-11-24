@@ -3,20 +3,23 @@ var mongoose = require('mongoose'),
     express = require('express'),
     router = express.Router();
 
+    //select user by id, gives just own_card info
     router.get('/id/:id', function(req, res) {
-        User.findById(req.params.id).exec(function(err, user) {
+        User.findById(req.params.id).select('own_card').exec(function(err, user) {
             res.send(user);
         });
     });
 
+    //select user by name, gives just own_card info
     router.get('/name/:name', function(req, res) {
         User.findOne({
-            lastName: req.params.name
-        }).exec(function(err, user) {
+            'own_card.lastName': req.params.name
+        }).select('own_card').exec(function(err, user) {
             res.send(user);
         });
     });
 
+    //gets all users & creates a new user
     router.route('/')
         .get(function(req, res) {
             User.find().exec(function(err, users) {
