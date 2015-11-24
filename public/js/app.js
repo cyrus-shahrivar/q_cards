@@ -47,13 +47,14 @@ var startSessionAndGetProfile = function() {
 
 // Utilize for getting sign-up / settings page.
 var getSettings = function () {
-  // console.log("sign up button is working");
-  // var username = $("#username-login").val();
-  // var password = $("#password-login").val();
-  // console.log(username, password);
+  var username = $("#username-login").val();
+  var password = $("#password-login").val();
+  console.log(username, password);
   $("#app-body").empty();
   var appBody = $('#app-body');
   var settingsScreen = Handlebars.compile($("#settings-screen").html());
+  console.log("sign up button is working");
+  console.log(username, password);
   appBody.append(settingsScreen);
 };
 
@@ -86,6 +87,7 @@ var getProfileAndPostSettings = function() {
   var appBody = $('#app-body');
   var profileScreen = Handlebars.compile($("#profile-screen").html());
   appBody.append(profileScreen);
+  console.log(username, firstName);
 };
 
 // Utilize to get about page.

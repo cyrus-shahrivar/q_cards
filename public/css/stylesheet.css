@@ -7,17 +7,16 @@ body {
 a:hover {
   cursor: pointer;
   color: darkgreen;
-
 }
 
 #master-container {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
+  margin: 0;
   text-align: center;
-  /*border: 1px solid black;*/
-  margin: 0 auto;
-  background-image:-webkit-linear-gradient(150deg, rgba(100, 100, 100, 0.8), rgba(170, 170, 170, 0.8), rgba(100, 100, 100, 0.8));
+  border: 1px solid black;
+  background-image:-webkit-linear-gradient(150deg, rgba(100, 100, 100, 0.0), rgba(170, 170, 170, 0.4), rgba(100, 100, 100, 0.0));
 /*  border-radius: 10px;*/
 }
 
@@ -26,15 +25,15 @@ a:hover {
   color: black;
 }
 
-.page {
-  position: fixed;
-  top: 900px;
+#nav:hover {
+  cursor: pointer;
+  color: darkgreen;
 }
 
 .contact {
   width: 200px;
   min-height: 100px;
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 5px 5px 5px 0px rgba(80,80,80,0.75);
   background-color: #ffffff);
   background-image: url("http://www.neenahpaper.com/images/finepaper/chips/cranes_lettra_papers/cranes_lettra_papers.pearl_white.lettra.1884.818.jpg");
   padding: 10px;
@@ -49,7 +48,7 @@ header {
   top: 0px;
   z-index: 10;
   width: 100%;
-  background-image:-webkit-linear-gradient(270deg, rgba(256, 256, 256, 0.8), rgba(206, 246, 206, 0.0));
+  background-image:-webkit-linear-gradient(270deg, rgba(236, 236, 236, 1), rgba(206, 246, 206, 0.0));
 }
 
 #header-logo {
@@ -84,7 +83,6 @@ header {
 
 #login-form {
   position: relative;
-  vertical-align: middle;
   margin: 80px auto 0 auto;
 }
 
@@ -123,7 +121,7 @@ footer {
   margin: 0 auto;
   bottom: 0px;
   z-index: 10;
-  
+  text-align: center;
   width: 100%;
   background-image:-webkit-linear-gradient(90deg, rgba(59, 102, 27, 0.9), rgba(169, 209, 114, 0.8));
   background-color: rgb(146, 190, 89);

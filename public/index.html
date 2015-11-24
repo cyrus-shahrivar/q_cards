@@ -43,11 +43,12 @@
       </p>
       </div>
       </template>
+
       <!-- profile-screen has the QR code for the user and a button to see the user's collected business cards-->
       <template class="page" id="profile-screen">
       <img src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="QRCode" id="QRCode"/>
       <p>
-        My Business Card
+        {{User.username}}'s Business Card
       </p>
       <p>
         <button type="button" name="button" id="my-cards">Go to My Cards</button>
