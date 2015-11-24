@@ -129,11 +129,21 @@ var getProfile = function() {
 
 var newCard = function() {
   $("#app-body").empty();
+  var plus = $("#add-card");
+  var input = $("<input>").attr("type", "file"). attr("capture", "camera").attr("accept", "image/*").attr("id", "cameraInput").attr("name", "New Contact");
+  var submit = $("<input>").attr("type", "submit").attr("value", "Read QR code");
   var appBody = $('#app-body');
   var scanScreen = Handlebars.compile($("#scan-card-template").html());
   // var scanCard = $('<input>').attr('type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"')
   appBody.append(scanScreen);
+
+  // $("#app-body").empty();
+  // var appBody = $('#app-body');
+  // var scanScreen = Handlebars.compile($("#scan-card-template").html());
+  // // var scanCard = $('<input>').attr('type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"')
+  // appBody.append(scanScreen);
 };
+
 
 
 //The following is redundant - handlebars takes care of it.

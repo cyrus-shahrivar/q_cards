@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     User = require('../models/user.js'),
     express = require('express'),
+    qr = require('../helpers/qrGenerator.js')
     router = express.Router();
 
     //select user by id, gives just own_card info

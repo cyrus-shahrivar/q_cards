@@ -1,11 +1,13 @@
 var mongoose = require('mongoose'),
     CompanySchema = require('./company.js'),
     BusinessCardInfo = require('./businessCardInfo.js'),
+    qr = require('../helpers/qrGenerator.js')
     bcrypt = require('bcrypt');
 /*
 User object has two components: my_card - public profile to share the QR code with others users, and
 all the information of the user for the settings view, so he can update the information, including the password
 */
+
 var UserSchema = new mongoose.Schema({
   username: String,
   password: String,
@@ -15,7 +17,7 @@ var UserSchema = new mongoose.Schema({
     ref: 'User'
   }],
   own_card: {
-     //the qr code will be a url: the location of the qr code image.
+     //qr_url: qrGen(),  //  need to work out how to get qrGen to use the ID
      qr_code: String,
      firstName: {
        type: String,
@@ -31,7 +33,8 @@ var UserSchema = new mongoose.Schema({
      email: {
        type: String,
        required: true,
-       trim: true},
+       trim: true
+     },
      //we also need to take in the phone number in a particular format, process it into a simple string of numbers, then render it back out in our chosen format (ie: countryCode-(areaCode) exchange-lineNumber would spit out 9-(999) 999-9999 or countryCode.areaCode.exchange.lineNumber would perhaps be more internationally friendly, giving us 9.999.999.9999)
      phone: {
        type: String,
@@ -92,6 +95,8 @@ UserSchema.pre('save', function(next) {
     });
   });
 });
+
+UserSchema.methods.generateQR = qr;
 
 
 UserSchema.methods.comparePassword = function(userPassword, cb) {
