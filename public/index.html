@@ -51,7 +51,7 @@
       <template id="profile-template">
       <div class="page">
       <h2>{{User.firstName}} {{User.lastName}}Joe McJosephson</h2>
-      <img src="{{User.own_card.qr_code}}" alt="QRCode" id="QRCode"/><br>
+      <img src="http://api.qrserver.com/v1/create-qr-code/?data=qCardsIsSoAwesome!" alt="QRCode" id="QRCode"/><br>
         <div class="card" id="my-card">
           <div class="card-contents">
             <div id="name">firstName lastName</div>
@@ -143,9 +143,9 @@
             <!-- MAX_FILE_SIZE (maximum file size in bytes) must precede the file input field used to upload the QR code image -->
             <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
             <!-- The "name" of the input field has to be "file" as it is the name of the POST parameter -->
-            <input class="capture" type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact">
+            <input type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact">
             <br>
-            <input class="capture" type="submit" value="Read QR code" />
+            <input type="submit" value="Read QR code" />
           </form>
         </div>
       </template>
