@@ -139,8 +139,14 @@
       <template id="scan-card-template">
         <div class="page">
           <h2>SCAN</h2>
-          <!-- This code may be useful for triggering the camera on smart phones -->
-          <input type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact">
+          <form enctype="multipart/form-data" action="http://api.qrserver.com/v1/read-qr-code/" method="POST">
+            <!-- MAX_FILE_SIZE (maximum file size in bytes) must precede the file input field used to upload the QR code image -->
+            <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+            <!-- The "name" of the input field has to be "file" as it is the name of the POST parameter -->
+            <input class="capture" type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact">
+            <br>
+            <input class="capture" type="submit" value="Read QR code" />
+          </form>
         </div>
       </template>
      
