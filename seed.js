@@ -61,11 +61,11 @@ var arrayOfCardInfo= [{
     firstName:"Kyle",
     lastName: "Gorjanc",
     title: "Web developer",
-    company: "565370fb61e13a0705ff6946",
+    company: "Frilled Lizards Incorporated",
     email: "kyle@gmail.com",
     phone: "+1(646)500-3425",
     social_media_links: {
-      url: "www.kyle.com"
+      url: "www.mylittlepony.com"
     }
   },
   {
