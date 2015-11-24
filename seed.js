@@ -40,26 +40,8 @@ var arrayOfCompanies = [{
 var arrayOfUsers = [{
     username: "kyle",
     password: "potatoes",
-<<<<<<< HEAD
-    contacts:[]
-},
-  {
-    username: "cyrus",
-    password: "potatoes",
-    contacts: []
-},
-  {
-    username: "kate",
-    password: "potatoes",
-    // own_card:['3455346465375467546754674567'],
-    // contacts:['35345']
-    contacts: []
-  }
-];
-
-
-    //businesCard:['3455346465375467546754674567'],
     contacts:[],
+    //businesCard:['3455346465375467546754674567'],
     own_card: {
       qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
       firstName:"Kyle",
@@ -77,25 +59,25 @@ var arrayOfUsers = [{
   {
     username: "cyrus",
     password: "potatoes",
-    //businesCard:['3455346465375467546754674567'],
     contacts: [],
     own_card: {
-      qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
-      firstName:"Cyrus",
-      lastName: "Shahrivar",
-      title: "Web developer",
-      company: arrayOfCompanies[0].name,
-      email: "cyrus@gmail.com",
-      phone: "+1(646)500-6754",
-      social_media_links: {
-        url: "www.cyrus.com"
+        qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
+        firstName:"Cyrus",
+        lastName: "Shahrivar",
+        title: "Web developer",
+        company: arrayOfCompanies[0].name,
+        email: "cyrus@gmail.com",
+        phone: "+1(646)500-6754",
+        social_media_links: {
+          url: "www.cyrus.com"
+        }
       }
-    }
-  },
+    },
   {
     username: "kate",
     password: "potatoes",
-    //businesCard:['3455346465375467546754674567'],
+    // own_card:['3455346465375467546754674567'],
+    // contacts:['35345']
     contacts: [],
     own_card: {
       qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=localhost:3000/users/own_card",
@@ -111,6 +93,11 @@ var arrayOfUsers = [{
     }
   }
 ];
+
+
+
+
+
 
 // var arrayOfCardInfo = [{
 //     qr_code: "http://api.qrserver.com/v1/create-qr-code/?data=http://www.qcards.com/user/1/own_card",
