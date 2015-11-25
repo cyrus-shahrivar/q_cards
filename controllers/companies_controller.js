@@ -39,11 +39,13 @@ router.route('/')
     })
     .post(function(req, res) {
         var company = new Company(req.body);
+        console.log("partially working");
         company.save(function(err) {
             if (err) {
                 console.log(err);
             } else {
                 console.log("Company saved.");
+                res.send("hi");
             }
         });
     });

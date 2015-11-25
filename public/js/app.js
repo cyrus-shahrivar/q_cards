@@ -10,8 +10,10 @@ $(function () {
     // if (loggedIn() === true) {
     //   appBody.prepend(profileScreen);
     // } else {
-      appBody.prepend(loginScreen);
+
     // }
+    //appBody.prepend(loginScreen({poop: "poop"}));
+    appBody.prepend(loginScreen);
   };
 
   appLaunch();
@@ -22,8 +24,7 @@ $(function () {
   $("#app-body").on('click', "#sign-up-button", getSettings);
   $("#app-body").on('click', "#update-account", getProfileAndPostSettings);
   $("#app-body").on('click', "#my-cards", getMyCards);
-
-  // $("#app-body").on('click', "#search", searchContacts);
+  $("#app-body").on('click', "#search", searchContacts);
 
   $("footer").on('click', "#about-link", getAboutScreen);
   $("footer").on('click', "#profile-link", getProfile);
@@ -41,21 +42,16 @@ $(function () {
 
 // Utilize for starting user session and getting QR code profile page.
 var startSessionAndGetProfile = function() {
-  // console.log("login-button is working");
-  // var username = $("#username-login").val();
-  // var password = $("#password-login").val();
-  // console.log(username, password);
- //  $.ajax({
- //   url: '/users/',
- //   method: 'GET',
- //   dataType: 'json'
- // }).done(function (someuser) {
- //   console.log(someuser);
- // });
-  $("#app-body").empty();
-  var appBody = $('#app-body');
-  var profileScreen = Handlebars.compile($("#profile-template").html());
-  appBody.append(profileScreen);
+
+  var username = $("#username-login").val();
+  var password = $("#password-login").val();
+
+  $.get('/users/name/'+username).done(function (data) {
+    $("#app-body").empty();
+    var appBody = $('#app-body');
+    var profileScreen = Handlebars.compile($("#profile-template").html());
+    appBody.append(profileScreen(data.own_card));
+  });
 };
 
 // Utilize for getting sign-up / settings page.
@@ -96,6 +92,17 @@ var getProfileAndPostSettings = function() {
   }).done(function () {
     console.log("hi, i worked a post whoo oohosdfoa;kdf"+username+password);
   });
+  $.post('/companies/', {
+    username: username,
+    password: password,
+    firstName: firstName,
+    lastName: lastName,
+    phone: phone,
+    company: company,
+    socialMedia: socialMedia
+  }).done(function () {
+    console.log("hi, i worked a post whoo oohosdfoa;kdf"+username+password);
+  });
   $("#app-body").empty();
   var appBody = $('#app-body');
   var profileScreen = Handlebars.compile($("#profile-template").html());
@@ -113,10 +120,13 @@ var getAboutScreen = function () {
 
 // Utilize for getting my cards page.
 var getMyCards = function() {
-  $("#app-body").empty();
-  var appBody = $('#app-body');
-  var myCardsScreen = Handlebars.compile($("#contacts-template").html());
-  appBody.append(myCardsScreen);
+  //used Shahrivar as a placeholder. in reality, this needs to grab current session user's contacts
+  $.get('/users/name/Shahrivar', function (data) {
+    $("#app-body").empty();
+    var appBody = $('#app-body');
+    var myCardsScreen = Handlebars.compile($("#contacts-template").html());
+    appBody.append(myCardsScreen(data));
+  });
 };
 
 var getProfile = function() {
@@ -125,7 +135,6 @@ var getProfile = function() {
   var profileScreen = Handlebars.compile($("#profile-template").html());
   appBody.append(profileScreen);
 };
-
 
 var newCard = function() {
   $("#app-body").empty();
@@ -142,35 +151,17 @@ var newCard = function() {
   // var scanScreen = Handlebars.compile($("#scan-card-template").html());
   // // var scanCard = $('<input>').attr('type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"')
   // appBody.append(scanScreen);
+
 };
 
-
-
-//The following is redundant - handlebars takes care of it.
-//GET THE ARRAY POSITION OF EACH CONTACT
-// var renderContacts = function() {
-//   contacts =
-//   Users.each(){
-//     event.preventDefault();
-//     var thisContact = $(this);
-//     var arrayPosition = contactListData.map(function(arrayItem) { return arrayItem.username; }).indexOf(thisContact);
-//     //GET OUR CONTACTS
-//     var thisContactObject = contacts[arrayPosition];
-
-//     //Populate the cards
-//     $('#contact-firstName').text(thisContactObject.firstName);
-//     $('#contact-lastName').text(thisContactObject.lastName);
-//     $('#contact-email').text(thisContactObject.email);
-//     $('#contact-phone').text(thisContactObject.phone);
-//     $('#contact-company').text(thisContactObject.company);
-//     $('#contact-logo').text(thisContactObject.company.logo-url);
-//     $('#contact-title').text(thisContactObject.title);
-//   }
-// };
-
 // Utilize for getting search field info and performing search.
-
-// var searchContacts = function () {
-//   var name = $("#find-name").val()
-//   console.log(name);
-// }
+var searchContacts = function () {
+  var name = $("#find-name").val();
+  $.get('/users/name/'+name).done(function (data) {
+    $("#app-body").empty();
+    var appBody = $('#app-body');
+    var myCardsScreen = Handlebars.compile($("#contacts-template").html());
+    appBody.append(myCardsScreen(data.own_card));
+    console.log(data.own_card);
+  });
+};
