@@ -25,14 +25,16 @@
       <!-- <input type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"> -->
         <span id="add-card">+</span>
       </header>
-      
+
       <!-- app-body ise the div that handlebars uses to attach handlebars templates to.  -->
       <div id="app-body"></div>
       <!-- login-template displays the username and password login fields.  It has two buttons: one for login, one for sign up. -->
       <template id="login-template">
+
       <div class="page" id="login-form">
       <img src="./images/Qcards-black.png" alt="logo" id="login-logo"/>
       <p>
+        <!-- <h1>hi{{poop}}</h1> -->
         <input type="text" class="input" placeholder="Username" name="name" id="username-login">
       </p>
       <p>
@@ -44,28 +46,29 @@
       <p>
         <button type="button" name="button" id="sign-up-button">Sign Up!</button>
       </p>
+      <!-- {{poop}} -->
       </div>
       </template>
 
       <!-- profile-template has the QR code for the user and a button to see the user's collected business cards-->
       <template id="profile-template">
       <div class="page">
-      <h2>{{User.firstName}} {{User.lastName}}Joe McJosephson</h2>
-      <img src="http://api.qrserver.com/v1/create-qr-code/?data=qCardsIsSoAwesome!" alt="QRCode" id="QRCode"/><br>
+      <h2>{{firstName}} {{lastName}}</h2>
+      <img src={{qr_code}} alt="QRCode" id="QRCode"/><br>
         <div class="card" id="my-card">
           <div class="card-contents">
-            <div id="name">firstName lastName</div>
-            <div id="title">title</div>
-            <div id="phone">phone</div>
-            <div id="email">email</div>
-            <div id="company">company</div>
-            <div id="logo"><img src="" alt="logo" id="this.company.logo"/></div>
-            <div id="url">personal-url</div>
-            <ul id="links">
+            <div id="name">{{firstName}} {{lastName}}</div>
+            <div id="title">{{title}}</div>
+            <div id="phone">{{phone}}</div>
+            <div id="email">{{email}}</div>
+            <div id="company">{{company}}</div>
+            <!-- <div id="logo"><img src="" alt="logo" id="this.company.logo"/></div> -->
+            <div id="url">{{social_media_links.url}}</div>
+            <!-- <ul id="links">
               {{#each links}}
                 <li><a href="url">location</a></li>
               {{/each}}
-            </ul>
+            </ul> -->
           </div>
         </div>
       </div>
@@ -99,24 +102,19 @@
           <input type="search" placeholder="Find a contact" name="search" id="find-name">
           <button type="button" name="button" id="search">Search</button>
         </p>
+
         <div class="card" id="contact">
           <div class="card-contents">
-          {{#each contacts}}
-            <div id="name">firstName lastName</div>
-            <div id="title">title</div>
-            <div id="phone">phone</div>
-            <div id="email">email</div>
-            <div id="company">company</div>
-            <div id="logo"><img src="" alt="logo" id="this.company.logo"/></div>
-            <div id="url">personal-url</div>
-            <ul id="links">
-              {{#each links}}
-                <li><a href="url">location</a></li>
-              {{/each}}
-            </ul>
-            {{/each}}
+            <div id="name">{{firstName}} {{lastName}}</div>
+            <div id="title">{{title}}</div>
+            <div id="phone">{{phone}}</div>
+            <div id="email">{{email}}</div>
+            <div id="company">{{company}}</div>
+            <!-- <div id="logo"><img src="" alt="logo" id="this.company.logo"/></div> -->
+            <div id="url">{{social_media_links.url}}</div>
           </div>
         </div>
+
       </div>
       </template>
 
@@ -149,7 +147,7 @@
           </form>
         </div>
       </template>
-     
+
 
 
 <!-- footer has the navigation tab bar and copyright that appears at the bottom of all pages -->
