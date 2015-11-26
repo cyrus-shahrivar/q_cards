@@ -1,16 +1,17 @@
-var express = require('express'),
-    logger = require('morgan'),
-    // session = require('express-session'),
+var express    = require('express'),
+    logger     = require('morgan'),
+    session    = require('express-session'),
     bodyParser = require('body-parser'),
-    mongoose = require('mongoose'),
-    // bcrypt = require('bcrypt'),
-    // router = express.Router(),
-    fs = require('fs-extra'),
-    // User = require('./models/user.js'),
-    companies = require('./controllers/companies_controller.js'),
-    users =  require('./controllers/users_controller.js'),
-    // sessions = require('./controllers/sessions_controller.js'),
-    app = express();
+    mongoose   = require('mongoose'),
+    upload     = require('formidable-upload'),
+    bcrypt     = require('bcrypt'),
+    fs         = require('fs-extra'),
+    User       = require('./models/user.js'),
+    companies  = require('./controllers/companies_controller.js'),
+    users      = require('./controllers/users_controller.js'),
+    sessions   = require('./controllers/sessions_controller.js'),
+    router     = express.Router(),
+    app        = express();
 
 //set up middleware
 app.use(logger('dev'));
