@@ -32,8 +32,7 @@ $(function () {
   $("footer").on('click', "#settings-link", getSettings);
 
   $("header").on('click', "#header-logo", getProfile);
-  $("header").on('click', "#header-logo", getProfile);
-}
+
   $("header").on('click', "#add-card", newCard);
 
   // // Username link click
@@ -144,7 +143,6 @@ var scanCard = function() {
   var scanScreen = Handlebars.compile($("#scan-card-template").html());
   // app.get('/upload', home.index);
   // app.post('/upload', uploader.middleware('imagefile'), home.upload, home.errors);
-  // var scanCard = $('<input>').attr('type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"')
   appBody.append(scanScreen);
 
   // $("#app-body").empty();
