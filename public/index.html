@@ -141,29 +141,35 @@
             <!-- MAX_FILE_SIZE (maximum file size in bytes) must precede the file input field used to upload the QR code image -->
             <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
             <!-- The "name" of the input field has to be "file" as it is the name of the POST parameter -->
-            <input type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact">
+            <input type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact" accept-charset="utf-8" method="post" action="/upload" enctype="multipart/form-data" id="fileUploadForm">
             <br>
-            <input type="submit" value="Read QR code" />
+            <input type="submit" name="imagefile" multiple="multiple" value="Read Qcard" />
+            <button class="upload-btn" type="submit"></button>
           </form>
         </div>
       </template>
 
+
+<!-- --------------------------------------------- -->
 
 
 <!-- footer has the navigation tab bar and copyright that appears at the bottom of all pages -->
       <footer>
         <div class="nav">
           <div class="navbox">
-            <span id="profile-link">&#128100;<br>My Profile</span>
+            <span id="profile-link">&#128100;<br>My Card</span>
           </div>
           <div class="navbox">
             <span id="contacts-link">&#128199;<br>Contacts</span>
           </div>
           <div class="navbox">
-            <span id="settings-link">&#9881;&#9881;&#9881;<br>Settings</span>
+            <span id="settings-link">&#128296;<br>Settings</span>
           </div>
           <div class="navbox">
-            <span id="about-link">&#8263;<br>About Us</span>
+            <span id="about-link">&#128214;<br>About</span>
+          </div>
+          <div class="navbox">
+            <span id="logout-link">&#9940;<br>Logout</span>
           </div>
         </div>
         <div id="copyright">&copy; Qcards 2015</div>

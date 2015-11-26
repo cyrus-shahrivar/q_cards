@@ -1,25 +1,13 @@
-var upload 		= require('formidable-upload')
-	,express 	= require('express')
-	,mongoose 	= require('mongoose')
-;
+var home = require('./home');
+var upload = require('formidable-upload');
 
-upload().to(['public', 'temp']).accept([/image*/])
+var uploader = upload().accept(/image*/).to(['public', 'data', 'images'], '9876543210').imguri();
 
-      // Build an upload instance but don't execute it right now
-      var uploader = upload()
-          .accept([/image*/])
-          .to(['public', 'temp'], 'temp_image')
-          .resize({
-              use: 'resize',
-              settings: {
-                  width: 500,
-                  quality: 80
-              }
-          })
-          .imguri();
+module.exports = function (app) {
+    app.get('/', home.index);
+    app.get('/upload', home.index);
+    app.post('/upload', uploader.middleware('imagefile'), home.upload, home.errors);
+};
 
-
-      // Define a middleware for handling image upload
-      //app.post('/upload', uploader.middleware('userfile'), routes.upload);
 
  //[Formidable Upload Example](https://github.com/vnykmshr/formidable-upload-example).

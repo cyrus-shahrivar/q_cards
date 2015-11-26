@@ -8,7 +8,7 @@ $(function () {
     var loginScreen = Handlebars.compile($("#login-template").html());
     var profileScreen = Handlebars.compile($("#profile-template").html());
     // if (loggedIn() === true) {
-    //   appBody.prepend(profileScreen);
+      // appBody.prepend(profileTemplate);
     // } else {
 
     // }
@@ -31,8 +31,9 @@ $(function () {
   $("footer").on('click', "#contacts-link", getMyCards);
   $("footer").on('click', "#settings-link", getSettings);
 
-
   $("header").on('click', "#header-logo", getProfile);
+  $("header").on('click', "#header-logo", getProfile);
+}
   $("header").on('click', "#add-card", newCard);
 
   // // Username link click
@@ -136,13 +137,13 @@ var getProfile = function() {
   appBody.append(profileScreen);
 };
 
-var newCard = function() {
+var scanCard = function() {
   $("#app-body").empty();
   var plus = $("#add-card");
-  var input = $("<input>").attr("type", "file"). attr("capture", "camera").attr("accept", "image/*").attr("id", "cameraInput").attr("name", "New Contact");
-  var submit = $("<input>").attr("type", "submit").attr("value", "Read QR code");
   var appBody = $('#app-body');
   var scanScreen = Handlebars.compile($("#scan-card-template").html());
+  // app.get('/upload', home.index);
+  // app.post('/upload', uploader.middleware('imagefile'), home.upload, home.errors);
   // var scanCard = $('<input>').attr('type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"')
   appBody.append(scanScreen);
 
