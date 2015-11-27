@@ -1,17 +1,23 @@
-var express = require('express'),
-    logger = require('morgan'),
-    session = require('express-session'),
+var express    = require('express'),
+    logger     = require('morgan'),
+    session    = require('express-session'),
     bodyParser = require('body-parser'),
-    mongoose = require('mongoose'),
-    // bcrypt = require('bcrypt'),
-    // router = express.Router(),
+    mongoose   = require('mongoose'),
+    upload     = require('formidable-upload'),
+    bcrypt     = require('bcrypt'),
+    fs         = require('fs-extra'),
+    util       = require('util'),
+    path       = require('path'),
+    compression= require('compression')
+methodOverride = require('method-override'),
+    User       = require('./models/user.js'),
+    companies  = require('./controllers/companies_controller.js'),
+    users      = require('./controllers/users_controller.js'),
+    sessions   = require('./controllers/sessions_controller.js'),
+    router     = express.Router(),
+    app        = express(),
     passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    // User = require('./models/user.js'),
-    companies = require('./controllers/companies_controller.js'),
-    users =  require('./controllers/users_controller.js'),
-    sessionsController = require('./controllers/sessions_controller.js'),
-    app = express();
+    LocalStrategy = require('passport-local').Strategy;
 
 //set up middleware
 app.use(logger('dev'));
@@ -22,6 +28,8 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+app.use(compression());
 
 // app.use(session({
 //   secret: "my favorite pillow",
@@ -42,6 +50,6 @@ app.listen(3000, function(){
   console.log('Listening to a frilled lizard on port 3000..');
 });
 
-app.use('/', sessionsController);
+app.use('/', sessions);
 app.use('/users', users);
 app.use('/companies', companies);

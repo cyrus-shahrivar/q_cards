@@ -25,14 +25,16 @@
       <!-- <input type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"> -->
         <span id="add-card">+</span>
       </header>
-      
+
       <!-- app-body ise the div that handlebars uses to attach handlebars templates to.  -->
       <div id="app-body"></div>
       <!-- login-template displays the username and password login fields.  It has two buttons: one for login, one for sign up. -->
       <template id="login-template">
+
       <div class="page" id="login-form">
       <img src="./images/Qcards-black.png" alt="logo" id="login-logo"/>
       <p>
+
         <input type="text" class="input" placeholder="Username" name="name" id="username-login">
       </p>
       <p>
@@ -44,28 +46,29 @@
       <p>
         <button type="button" name="button" id="sign-up-button">Sign Up!</button>
       </p>
+
       </div>
       </template>
 
       <!-- profile-template has the QR code for the user and a button to see the user's collected business cards-->
       <template id="profile-template">
       <div class="page">
-      <h2>{{User.firstName}} {{User.lastName}}Joe McJosephson</h2>
-      <img src="http://api.qrserver.com/v1/create-qr-code/?data=qCardsIsSoAwesome!" alt="QRCode" id="QRCode"/><br>
+      <h2>{{firstName}} {{lastName}}</h2>
+      <img src={{qr_code}} alt="QRCode" id="QRCode"/><br>
         <div class="card" id="my-card">
           <div class="card-contents">
-            <div id="name">firstName lastName</div>
-            <div id="title">title</div>
-            <div id="phone">phone</div>
-            <div id="email">email</div>
-            <div id="company">company</div>
-            <div id="logo"><img src="" alt="logo" id="this.company.logo"/></div>
-            <div id="url">personal-url</div>
-            <ul id="links">
+            <div id="name">{{firstName}} {{lastName}}</div>
+            <div id="title">{{title}}</div>
+            <div id="phone">{{phone}}</div>
+            <div id="email">{{email}}</div>
+            <div id="company">{{company}}</div>
+            <!-- <div id="logo"><img src="" alt="logo" id="this.company.logo"/></div> -->
+            <div id="url">{{social_media_links.url}}</div>
+            <!-- <ul id="links">
               {{#each links}}
                 <li><a href="url">location</a></li>
               {{/each}}
-            </ul>
+            </ul> -->
           </div>
         </div>
       </div>
@@ -84,6 +87,9 @@
         <p><input type="email" placeholder="Email Address" name="email" id="email"></p>
         <p><input type="text" placeholder="Company" name="company" id="company"></p>
         <p><input type="text" placeholder="Company Address" name="company-address" id="company-address"></p>
+        <p><input type="text" placeholder="Company Phone" name="company-phone" id="company-phone"></p>
+        <p><input type="text" placeholder="Company Email" name="company-email" id="company-email"></p>
+        <p><input type="text" placeholder="Company Website" name="company-website" id="company-website-url"></p>
         <p><input type="text" placeholder="Company Logo" name="company-logo" id="company-logo-url"></p>
         <p><input type="text" placeholder="Social Media URLs (Separate By Commas)" name="seach" id="social-media"></p>
         <p><button type="button" name="button" id="update-account">Update Account</button></p>
@@ -99,24 +105,19 @@
           <input type="search" placeholder="Find a contact" name="search" id="find-name">
           <button type="button" name="button" id="search">Search</button>
         </p>
+
         <div class="card" id="contact">
           <div class="card-contents">
-          {{#each contacts}}
-            <div id="name">firstName lastName</div>
-            <div id="title">title</div>
-            <div id="phone">phone</div>
-            <div id="email">email</div>
-            <div id="company">company</div>
-            <div id="logo"><img src="" alt="logo" id="this.company.logo"/></div>
-            <div id="url">personal-url</div>
-            <ul id="links">
-              {{#each links}}
-                <li><a href="url">location</a></li>
-              {{/each}}
-            </ul>
-            {{/each}}
+            <div id="name">{{firstName}} {{lastName}}</div>
+            <div id="title">{{title}}</div>
+            <div id="phone">{{phone}}</div>
+            <div id="email">{{email}}</div>
+            <div id="company">{{company}}</div>
+            <!-- <div id="logo"><img src="" alt="logo" id="this.company.logo"/></div> -->
+            <div id="url">{{social_media_links.url}}</div>
           </div>
         </div>
+
       </div>
       </template>
 
@@ -143,29 +144,35 @@
             <!-- MAX_FILE_SIZE (maximum file size in bytes) must precede the file input field used to upload the QR code image -->
             <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
             <!-- The "name" of the input field has to be "file" as it is the name of the POST parameter -->
-            <input type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact">
+            <input type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact" accept-charset="utf-8" method="post" action="/upload" enctype="multipart/form-data" id="fileUploadForm">
             <br>
-            <input type="submit" value="Read QR code" />
+            <input type="submit" name="imagefile" multiple="multiple" value="Read Qcard" />
+            <button class="upload-btn" type="submit"></button>
           </form>
         </div>
       </template>
-     
+
+
+<!-- -->
 
 
 <!-- footer has the navigation tab bar and copyright that appears at the bottom of all pages -->
       <footer>
         <div class="nav">
           <div class="navbox">
-            <span id="profile-link">&#128100;<br>My Profile</span>
+            <span id="profile-link">&#128100;<br>My Card</span>
           </div>
           <div class="navbox">
             <span id="contacts-link">&#128199;<br>Contacts</span>
           </div>
           <div class="navbox">
-            <span id="settings-link">&#9881;&#9881;&#9881;<br>Settings</span>
+            <span id="settings-link">&#128296;<br>Settings</span>
           </div>
           <div class="navbox">
-            <span id="about-link">&#8263;<br>About Us</span>
+            <span id="about-link">&#128214;<br>About</span>
+          </div>
+          <div class="navbox">
+            <span id="logout-link">&#9940;<br>Logout</span>
           </div>
         </div>
         <div id="copyright">&copy; Qcards 2015</div>

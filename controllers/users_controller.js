@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
     User = require('../models/user.js'),
     express = require('express'),
-    qr = require('../helpers/qrGenerator.js')
+    qr = require('../helpers/qrGenerator.js'),
     router = express.Router();
 
     //select user by id, gives just own_card info
@@ -15,6 +15,15 @@ var mongoose = require('mongoose'),
     router.get('/name/:name', function(req, res) {
         User.findOne({
             'own_card.lastName': req.params.name
+        }).select('own_card').exec(function(err, user) {
+            res.send(user);
+        });
+    });
+
+    //select user by username, gives just own_card info
+    router.get('/username/:username', function(req, res) {
+        User.findOne({
+            username: req.params.username
         }).select('own_card').exec(function(err, user) {
             res.send(user);
         });
