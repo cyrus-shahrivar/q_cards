@@ -41,7 +41,7 @@ var startSessionAndGetProfile = function() {
   var password = $("#password-login").val();
 
   //This ajax call should grab the current session user.
-  $.post('/login/', {username: username, password: password}).done(function (data) {
+  $.post('/sessions/login/', {username: username, password: password}).done(function (data) {
     $("#app-body").empty();
     var appBody = $('#app-body');
     var profileScreen = Handlebars.compile($("#profile-template").html());
@@ -87,7 +87,7 @@ var getProfileAndPostSettings = function() {
   $.post('/users/', userInfo);
   $.post('/companies/', companyInfo);
 
-  $.get('/currentuser').done(function (data) {
+  $.get('sessions/currentuser').done(function (data) {
     $("#app-body").empty();
     var appBody = $('#app-body');
     var profileScreen = Handlebars.compile($("#profile-template").html());
@@ -106,7 +106,7 @@ var getAboutScreen = function () {
 // Utilize for getting my cards page.
 var getMyCards = function() {
   //used Shahrivar as a placeholder. in reality, this needs to grab current session user's contacts
-  $.get('/users/name/Shahrivar', function (data) {
+  $.get('/sessions/currentuser', function (data) {
     $("#app-body").empty();
     var appBody = $('#app-body');
     var myCardsScreen = Handlebars.compile($("#contacts-template").html());
@@ -139,7 +139,7 @@ var scanCard = function() {
 };
 
 var postLogout = function (argument) {
-  $.post('/logout').done(function () {
+  $.post('/sessions/signout').done(function () {
     $("#app-body").empty();
     var appBody = $('#app-body');
     var loginScreen = Handlebars.compile($("#login-template").html());
