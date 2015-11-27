@@ -1,25 +1,19 @@
-// Ajax calls and database info displaying still need to be added.
-
-
 $(function () {
   // Displays the login template on startup.
   var appLaunch = function () {
     var appBody = $('#app-body');
     var loginScreen = Handlebars.compile($("#login-template").html());
     var profileScreen = Handlebars.compile($("#profile-template").html());
+    appBody.prepend(loginScreen);
     // if (loggedIn() === true) {
       // appBody.prepend(profileTemplate);
     // } else {
-
     // }
-    //appBody.prepend(loginScreen({poop: "poop"}));
-    appBody.prepend(loginScreen);
   };
 
   appLaunch();
 
   // Below are the event listeners within the document ready function.
-
   $("#app-body").on('click', "#login-button", startSessionAndGetProfile);
   $("#app-body").on('click', "#sign-up-button", getSettings);
   $("#app-body").on('click', "#update-account", getProfileAndPostSettings);
@@ -30,9 +24,9 @@ $(function () {
   $("footer").on('click', "#profile-link", getProfile);
   $("footer").on('click', "#contacts-link", getMyCards);
   $("footer").on('click', "#settings-link", getSettings);
+  $("footer").on('click', "#logout-link", postLogout);
 
   $("header").on('click', "#header-logo", getProfile);
-
   $("header").on('click', "#add-card", newCard);
 
   // // Username link click
@@ -46,7 +40,8 @@ var startSessionAndGetProfile = function() {
   var username = $("#username-login").val();
   var password = $("#password-login").val();
 
-  $.get('/users/name/'+username).done(function (data) {
+  //This ajax call should grab the current session user.
+  $.post('/login/', {username: username, password: password}).done(function (data) {
     $("#app-body").empty();
     var appBody = $('#app-body');
     var profileScreen = Handlebars.compile($("#profile-template").html());
@@ -58,56 +53,46 @@ var startSessionAndGetProfile = function() {
 var getSettings = function () {
   var username = $("#username-login").val();
   var password = $("#password-login").val();
-  console.log(username, password);
+
   $("#app-body").empty();
   var appBody = $('#app-body');
   var settingsScreen = Handlebars.compile($("#settings-template").html());
-  console.log("sign up button is working");
-  console.log(username, password);
   appBody.append(settingsScreen);
 };
 
 // Utilize for getting profile pages and posting settings form / registration form information.
 var getProfileAndPostSettings = function() {
-  //create an object , make it dry
-  var firstName = $("#firstName").val();
-  var lastName = $("#lastName").val();
-  var password = $("#password").val();
-  var username = $("#username").val();
-  var phone = $("#phone").val();
-  var email = $("#email").val();
-  var company = $("#company").val();
-  var companyAddress = $("#company-address").val();
-  var companyLogo = $("#company-logo-url").val();
-  var socialMedia = $("#social-media").val();
-  // console.log(username + password + name + phone + email + company + companyAddress + companyLogo + socialMedia);
-  $.post('/users/', {
-    username: username,
-    password: password,
-    firstName: firstName,
-    lastName: lastName,
-    phone: phone,
-    company: company,
-    socialMedia: socialMedia
-  }).done(function () {
-    console.log("hi, i worked a post whoo oohosdfoa;kdf"+username+password);
+
+  var userInfo = {
+    username: $("#username").val(),
+    password: $("#password").val(),
+    firstName: $("#firstName").val(),
+    lastName: $("#lastName").val(),
+    email: $("#email").val(),
+    phone: $("#phone").val(),
+    company: $("#company").val(),
+    socialMedia: $("#social-media").val()
+  };
+
+  var companyInfo = {
+    name: $("#company").val(),
+    address: $("#company-address").val(),
+    logo: $("#company-logo-url").val(),
+    website: $("#company-website-url").val(),
+    phone: $("#company-phone").val(),
+    email: $("#company-email").val()
+  };
+
+  //Posts new user and company info to respective collections
+  $.post('/users/', userInfo);
+  $.post('/companies/', companyInfo);
+
+  $.get('/currentuser').done(function (data) {
+    $("#app-body").empty();
+    var appBody = $('#app-body');
+    var profileScreen = Handlebars.compile($("#profile-template").html());
+    appBody.append(profileScreen(data));
   });
-  $.post('/companies/', {
-    username: username,
-    password: password,
-    firstName: firstName,
-    lastName: lastName,
-    phone: phone,
-    company: company,
-    socialMedia: socialMedia
-  }).done(function () {
-    console.log("hi, i worked a post whoo oohosdfoa;kdf"+username+password);
-  });
-  $("#app-body").empty();
-  var appBody = $('#app-body');
-  var profileScreen = Handlebars.compile($("#profile-template").html());
-  appBody.append(profileScreen);
-  console.log(username, firstName);
 };
 
 // Utilize to get about page.
@@ -151,6 +136,15 @@ var scanCard = function() {
   // // var scanCard = $('<input>').attr('type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"')
   // appBody.append(scanScreen);
 
+};
+
+var postLogout = function (argument) {
+  $.post('/logout').done(function () {
+    $("#app-body").empty();
+    var appBody = $('#app-body');
+    var loginScreen = Handlebars.compile($("#login-template").html());
+    appBody.prepend(loginScreen);
+  });
 };
 
 // Utilize for getting search field info and performing search.
