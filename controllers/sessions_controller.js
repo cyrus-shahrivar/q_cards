@@ -12,19 +12,18 @@ var isAuthenticated = function(req, res, next){
 	  next();
 };
 
-module.exports.controller = function(passport){
+module.exports = function(passport){
 		//GET login page
-		router.get('/', function(req, res){
-			res.render('login-template', {message: req.flash('Please, log in')});
+		router.get('/login', function(req, res){
+			res.render('login-template');
+      console.log('on log in page');
 		});
 		//Login POST
-		router.post('/login', passport.authenticate('login'), function(req, res){
-			// successRedirect: '/profile-template',
-			// failureRedirect: '/',
-			// failureFlash: true
-      res.send(req.user);
-      console.log('Hello' + user)
-		});
+	router.post('/login', passport.authenticate('local', {
+    successRedirect: '/user/',
+    failureRedirect: '/',
+    failureFlash: true
+  }));
 		//GET registration page
 		router.get('/signup', function(req, res){
 				res.render('settings-template', {message: req.flash('message')});
@@ -37,7 +36,7 @@ module.exports.controller = function(passport){
 		}));
 		//GET Home page
 		router.get('/user', isAuthenticated, function(req, res){
-			res.render('profile-template', {user: req.user});
+			res.render('profile-template', {Username: req.username});
 		});
 
 		//LOG OUT

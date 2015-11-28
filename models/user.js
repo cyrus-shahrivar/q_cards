@@ -21,18 +21,18 @@ var UserSchema = new mongoose.Schema({
      qr_code: String,
      firstName: {
        type: String,
-       required: true,
+      //  required: true,
        trim: true
      },
      lastName: {
        type: String,
-       required: true,
+      //  required: true,
        trim: true
      },
      //we also need to VERIFY the email, to make sure the user is real and contactable, and need to check the validity against a regex.
      email: {
        type: String,
-       required: true,
+      //  required: true,
        trim: true
      },
      //we also need to take in the phone number in a particular format, process it into a simple string of numbers, then render it back out in our chosen format (ie: countryCode-(areaCode) exchange-lineNumber would spit out 9-(999) 999-9999 or countryCode.areaCode.exchange.lineNumber would perhaps be more internationally friendly, giving us 9.999.999.9999)
@@ -45,7 +45,7 @@ var UserSchema = new mongoose.Schema({
      //referencing Company Object
      company: {
        type: String,
-       required: true,
+      //  required: true,
        trim: true
      },
      social_media_links: {

@@ -14,7 +14,7 @@ $(function () {
   appLaunch();
 
   // Below are the event listeners within the document ready function.
-  $("#app-body").on('click', "#login-button", startSessionAndGetProfile);
+  $("#app-body").on('click', "#login-button", login);
   $("#app-body").on('click', "#sign-up-button", getSettings);
   $("#app-body").on('click', "#update-account", getProfileAndPostSettings);
   $("#app-body").on('click', "#my-cards", getMyCards);
@@ -27,7 +27,7 @@ $(function () {
   $("footer").on('click', "#logout-link", postLogout);
 
   $("header").on('click', "#header-logo", getProfile);
-  $("header").on('click', "#add-card", newCard);
+  //$("header").on('click', "#add-card", newCard);
 
   // // Username link click
   // $('#contacts-screen').on('load', 'td a.linkshowuser', renderContacts);
@@ -35,13 +35,13 @@ $(function () {
 });
 
 // Utilize for starting user session and getting QR code profile page.
-var startSessionAndGetProfile = function() {
+var login = function() {
 
   var username = $("#username-login").val();
   var password = $("#password-login").val();
 
   //This ajax call should grab the current session user.
-  $.post('/sessions/login/', {username: username, password: password}).done(function (data) {
+  $.post('/sessions', {username: username, password: password}).done(function (data) {
     $("#app-body").empty();
     var appBody = $('#app-body');
     var profileScreen = Handlebars.compile($("#profile-template").html());
@@ -51,9 +51,6 @@ var startSessionAndGetProfile = function() {
 
 // Utilize for getting sign-up / settings page.
 var getSettings = function () {
-  var username = $("#username-login").val();
-  var password = $("#password-login").val();
-
   $("#app-body").empty();
   var appBody = $('#app-body');
   var settingsScreen = Handlebars.compile($("#settings-template").html());
@@ -87,11 +84,11 @@ var getProfileAndPostSettings = function() {
   $.post('/users/', userInfo);
   $.post('/companies/', companyInfo);
 
-  $.get('sessions/currentuser').done(function (data) {
+  $.get('/current_user').done(function (data) {
     $("#app-body").empty();
     var appBody = $('#app-body');
     var profileScreen = Handlebars.compile($("#profile-template").html());
-    appBody.append(profileScreen(data));
+    appBody.append(profileScreen(data.own_card));
   });
 };
 
@@ -106,7 +103,7 @@ var getAboutScreen = function () {
 // Utilize for getting my cards page.
 var getMyCards = function() {
   //used Shahrivar as a placeholder. in reality, this needs to grab current session user's contacts
-  $.get('/sessions/currentuser', function (data) {
+  $.get('/current_user', function (data) {
     $("#app-body").empty();
     var appBody = $('#app-body');
     var myCardsScreen = Handlebars.compile($("#contacts-template").html());
@@ -115,10 +112,12 @@ var getMyCards = function() {
 };
 
 var getProfile = function() {
-  $("#app-body").empty();
-  var appBody = $('#app-body');
-  var profileScreen = Handlebars.compile($("#profile-template").html());
-  appBody.append(profileScreen);
+  $.get('/current_user').done(function (data) {
+    $("#app-body").empty();
+    var appBody = $('#app-body');
+    var profileScreen = Handlebars.compile($("#profile-template").html());
+    appBody.append(profileScreen(data.own_card));
+  });
 };
 
 var scanCard = function() {
@@ -138,23 +137,22 @@ var scanCard = function() {
 
 };
 
-var postLogout = function (argument) {
-  $.post('/sessions/signout').done(function () {
-    $("#app-body").empty();
-    var appBody = $('#app-body');
-    var loginScreen = Handlebars.compile($("#login-template").html());
-    appBody.prepend(loginScreen);
-  });
+var postLogout = function() {
+    $.ajax({url: '/sessions', method: 'DELETE'}).done(function() {
+        $("#app-body").empty();
+        var appBody = $('#app-body');
+        var loginScreen = Handlebars.compile($("#login-template").html());
+        appBody.prepend(loginScreen);
+    });
 };
 
 // Utilize for getting search field info and performing search.
 var searchContacts = function () {
   var name = $("#find-name").val();
-  $.get('/users/name/'+name).done(function (data) {
+  $.get('/current_user/contacts').done(function (data) {
     $("#app-body").empty();
     var appBody = $('#app-body');
     var myCardsScreen = Handlebars.compile($("#contacts-template").html());
-    appBody.append(myCardsScreen(data.own_card));
-    console.log(data.own_card);
+    appBody.append(myCardsScreen(data));
   });
 };
