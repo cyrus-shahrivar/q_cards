@@ -23,7 +23,7 @@
         <img src="./images/Qlogo.png" alt="logo" id="header-logo"/>
         <!-- This code may be useful for triggering the camera on smart phones -->
       <!-- <input type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"> -->
-        <span id="add-card">+</span>
+        <div id="add-card"><button type="file" capture="camera" accept="image/*" id="camera-input" name="New Contact" accept-charset="utf-8" method="post" action="/upload" enctype="multipart/form-data" id="fileUploadForm">SCAN</button></div>
       </header>
 
       <!-- app-body ise the div that handlebars uses to attach handlebars templates to.  -->
@@ -164,11 +164,13 @@
             <input type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact" accept-charset="utf-8" method="post" action="/upload" enctype="multipart/form-data" id="fileUploadForm">
             <br>
             <input type="submit" name="imagefile" multiple="multiple" value="Read Qcard" />
-            <button class="upload-btn" type="submit"></button>
+            <button class="upload-btn" type="submit">Read Qcard</button>
           </form>
         </div>
       </template>
 
+
+<!-- -->
 
 <!-- -->
 
