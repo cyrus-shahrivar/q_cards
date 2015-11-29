@@ -78,7 +78,9 @@ app.get('/users/:id', authenticate, restrictAccess, function (req, res) {
 
 //to send current session's user to app.js and subsequent view in html template
 app.get('/current_user', function(req, res) {
-  User.findById(req.session.currentUser).exec(function (err, user) {
+  User.findOneAndUpdate({_id: req.session.currentUser}, {$set: {"own_card.qr_code": "http://api.qrserver.com/v1/create-qr-code/?data=" + req.session.currentUser}}, {"new": true}, function (err, user) {
+    // var QRCode = user.own_card.qr_code;
+    // QRCode = "http://api.qrserver.com/v1/create-qr-code/?data=" + req.session.currentUser;
     res.send(user);
   });
 });
@@ -187,7 +189,7 @@ app.post('/sessions', function (req, res) {
 
 //we're still working on getting this working
 app.delete('/sessions', function (req,res) {
-  req.session.name = null;
+  req.session.currentUser = null;
   console.log("delete route hit");
   res.send("Deleting session");
 });
