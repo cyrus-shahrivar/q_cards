@@ -55,15 +55,15 @@ app.listen(3000, function(){
 var restrictAccess = function (req, res, next) {
   var sessionId = req.session.currentUser;
   var reqId = req.params.id;
-  sessionId = reqId ? next() : res.status(400).send({err: 400, msg: "You shall not pass"});
+  sessionId = reqId ? next() : res.status(400).send({err: 400, msg: "No access"});
 };
 
 var authenticate = function (req, res, next) {
-  req.session.currentUser ? next() : res.status(403).send({err: 403, msg: "log in troll"});
+  req.session.currentUser ? next() : res.status(403).send({err: 403, msg: "Please, log in"});
 };
 
 //probably don't need this one
-app.get('/users', function(req, res) {
+app.get('/users', authenticate, restrictAccess, function(req, res) {
   User.find().exec(function (err, users) {
     res.send(users);
   });
@@ -88,21 +88,32 @@ app.get('/current_user/contacts', function(req, res) {
   User.findById(req.session.currentUser).exec(function (err, user) {
     var contactsArray = [];
     var contacts = user.contacts;
-    var looping = function () {
-      var something = contacts.forEach(function (contact) {
-      console.log("This is contacts: " + contact);
-      User.findById(contact).exec(function (err, person) {
-        console.log("This is person.own_card" + person.own_card);
-        contactsArray.push(person.own_card);
-        console.log(contactsArray);
-        });
-      });
-      console.log("This is something: " + something);
-      console.log("This is contactsArray: " + contactsArray);
-
-    }
-    var stupidHead = looping();
-    res.send(contactsArray);
+      // contacts.forEach(function (contact) {
+      //   var counter = contacts.length;
+      //   console.log("Current counter: " + counter);
+      //   console.log("This is contacts: " + contact);
+      //   User.findById(contact).exec(function (err, person) {
+      //   console.log("This is person.own_card" + person.own_card);
+      //   contactsArray.push(person.own_card);
+      //   console.log("Current contacts array: " + contactsArray);
+      //   counter--;
+      //   console.log("Current counter: " + counter);
+      //   if(counter==0) res.send(contactsArray);
+      //   });
+      //
+      // });
+      for (var i = 0; i < contacts.length; i++){
+        var counter = contacts.length;
+         console.log("Current counter, before pushing: " + counter);
+         console.log("This is contacts: " + contacts[i]);
+        User.findById(contacts[i]).exec(function(err, person){
+          contactsArray.push(person.own_card);
+          counter--;
+          console.log("Counter after pushing: " + counter);
+          console.log("Current array: " + contactsArray);
+          if(counter == 0) res.send(contactsArray);
+        })
+      }
   });
 });
 
