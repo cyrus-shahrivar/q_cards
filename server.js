@@ -104,12 +104,12 @@ app.get('/current_user/contacts', function(req, res) {
       // });
       for (var i = 0; i < contacts.length; i++){
         var counter = contacts.length;
-         console.log("Current counter, before pushing: " + counter);
-         console.log("This is contacts: " + contacts[i]);
+        //  console.log("Current counter, before pushing: " + counter);
+        //  console.log("This is contacts: " + contacts[i]);
         User.findById(contacts[i]).exec(function(err, person){
           contactsArray.push(person.own_card);
           counter--;
-          console.log("Counter after pushing: " + counter);
+          // console.log("Counter after pushing: " + counter);
           console.log("Current array: " + contactsArray);
           if(counter == 0) res.send(contactsArray);
         })

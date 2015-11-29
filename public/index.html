@@ -98,14 +98,8 @@
 
 
 
- <!-- contacts-template has a search bar and all collected cards within -->
-      <template id="contacts-template">
+ <template id="contacts-template">
       <div class="page">
-        <p>
-          <input type="search" placeholder="Find a contact" name="search" id="find-name">
-          <button type="button" name="button" id="search">Search</button>
-        </p>
-        {{#each contact}}
         <div class="card" id="contact">
           <div class="card-contents">
             <div id="name">{{firstName}} {{lastName}}</div>
@@ -117,10 +111,17 @@
             <div id="url">{{social_media_links.url}}</div>
           </div>
         </div>
-      {{/each}}
       </div>
       </template>
 
+      <template id="search-bar-template">
+      <div class="page">
+        <p>
+          <input type="search" placeholder="Find a contact" name="search" id="find-name">
+          <button type="button" name="button" id="search">Search</button>
+        </p>
+      </div>
+      </template>
 
 
       <!-- about-template has a short blurb about the purpose of the website  -->

@@ -41,13 +41,17 @@ var login = function() {
   var password = $("#password-login").val();
 
   //This ajax call should grab the current session user.
-  $.post('/sessions', {username: username, password: password}).done(function (data) {
-    $("#app-body").empty();
-    var appBody = $('#app-body');
-    var profileScreen = Handlebars.compile($("#profile-template").html());
-    appBody.append(profileScreen(data.own_card));
+  $.post('/sessions', {username: username, password: password}).done(function () {
+    $.get('/current_user', function (data) {
+      console.log(data);
+      $("#app-body").empty();
+      var appBody = $('#app-body');
+      var profileScreen = Handlebars.compile($("#profile-template").html());
+      appBody.append(profileScreen(data.own_card));
+    });
   });
 };
+
 
 // Utilize for getting sign-up / settings page.
 var getSettings = function () {
@@ -89,16 +93,22 @@ var getProfileAndPostSettings = function() {
         contentType: 'application/json; charset=UTF-8',
         data       : JSON.stringify(userInfo),
         success    : function(){ console.log("success");}
+      }).done(function(){
+        $('#app-body').empty();
+            var appBody = $('#app-body');
+            var loginScreen = Handlebars.compile($("#login-template").html());
+            appBody.append(loginScreen);
+            login();
       });
 
   $.post('/companies/', companyInfo);
 
-  $.get('/current_user').done(function (data) {
-    $("#app-body").empty();
-    var appBody = $('#app-body');
-    var profileScreen = Handlebars.compile($("#profile-template").html());
-    appBody.append(profileScreen(data.own_card));
-  });
+  // $.get('/current_user').done(function (data) {
+  //   $("#app-body").empty();
+  //   var appBody = $('#app-body');
+  //   var profileScreen = Handlebars.compile($("#profile-template").html());
+  //   appBody.append(profileScreen(data.own_card));
+  // });
 };
 
 // Utilize to get about page.
@@ -111,12 +121,15 @@ var getAboutScreen = function () {
 
 // Utilize for getting my cards page.
 var getMyCards = function() {
-  //used Shahrivar as a placeholder. in reality, this needs to grab current session user's contacts
+  $("#app-body").empty();
+  var searchBar = Handlebars.compile($('#search-bar-template').html());
+  $('#app-body').append(searchBar);
   $.get('/current_user/contacts', function (data) {
-    $("#app-body").empty();
-    var appBody = $('#app-body');
-    var myCardsScreen = Handlebars.compile($("#contacts-template").html());
-    appBody.append(myCardsScreen(data));
+    data.forEach(function (contact) {
+      var appBody = $('#app-body');
+      var myCardsScreen = Handlebars.compile($("#contacts-template").html());
+      appBody.append(myCardsScreen(contact));
+    });
   });
 };
 
