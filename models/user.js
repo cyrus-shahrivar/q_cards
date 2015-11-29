@@ -20,7 +20,7 @@ var UserSchema = new mongoose.Schema({
      //qr_url: qrGen(),  //  need to work out how to get qrGen to use the ID
      qr_code: String,
      firstName: {
-       type: String,
+     type: String,
       //  required: true,
        trim: true
      },
@@ -78,6 +78,25 @@ var UserSchema = new mongoose.Schema({
 //this is a 'hook'. It says, 'do this function before you save!'
 
 UserSchema.pre('save', function(next) {
+  var user = this;
+  //only hash the password if it has been modified.
+  if(!user.isModified('password')) return next();
+
+  bcrypt.genSalt(10, function (err, salt) {
+    if(err) return next();
+
+    //hash the password using our new salt
+    bcrypt.hash(user.password, salt, function (err, hashedPassword) {
+      if(err) return next();
+
+      //override the users password with the hashed one
+      user.password = hashedPassword;
+      next();
+    });
+  });
+});
+
+UserSchema.pre('insert', function(next) {
   var user = this;
   //only hash the password if it has been modified.
   if(!user.isModified('password')) return next();

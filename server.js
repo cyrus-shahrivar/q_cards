@@ -115,7 +115,10 @@ app.get('/companies', function(req, res) {
 
 //creates a new user
 app.post('/users', function (req, res) {
-  var user = new User(req.body);
+  //does not work! gives 500 error
+  var poop = JSON.parse(req.body);
+  var user = new User(poop);
+  console.log(req.body);
   user.save(function (err) {
     if (err) {
       console.log(err);

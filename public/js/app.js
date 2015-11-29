@@ -63,12 +63,14 @@ var getProfileAndPostSettings = function() {
   var userInfo = {
     username: $("#username").val(),
     password: $("#password").val(),
-    firstName: $("#firstName").val(),
-    lastName: $("#lastName").val(),
-    email: $("#email").val(),
-    phone: $("#phone").val(),
-    company: $("#company").val(),
-    socialMedia: $("#social-media").val()
+    own_card: {
+        'firstName': $("#firstName").val(),
+        'lastName': $("#lastName").val(),
+        'email': $("#email").val(),
+        'phone': $("#phone").val(),
+        'company': $("#company").val(),
+        'socialMedia': $("#social-media").val()
+    }
   };
 
   var companyInfo = {
@@ -81,7 +83,12 @@ var getProfileAndPostSettings = function() {
   };
 
   //Posts new user and company info to respective collections
-  $.post('/users/', userInfo);
+$.ajax({ url        : '/users',
+        type       : 'POST',
+        data       : {'userInfo':JSON.stringify(userInfo)},
+        success    : function(){ console.log("success");}
+      })
+
   $.post('/companies/', companyInfo);
 
   $.get('/current_user').done(function (data) {
@@ -103,7 +110,7 @@ var getAboutScreen = function () {
 // Utilize for getting my cards page.
 var getMyCards = function() {
   //used Shahrivar as a placeholder. in reality, this needs to grab current session user's contacts
-  $.get('/current_user', function (data) {
+  $.get('/current_user/contacts', function (data) {
     $("#app-body").empty();
     var appBody = $('#app-body');
     var myCardsScreen = Handlebars.compile($("#contacts-template").html());
