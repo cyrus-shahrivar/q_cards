@@ -56,13 +56,19 @@
       <h2>{{firstName}} {{lastName}}</h2>
       <img src={{qr_code}} alt="QRCode" id="QRCode"/><br>
         <div class="card" id="my-card">
+          <div id="card-company">
+            <div class="card-logo">
+              <img src="./images/Qlogo.png" alt="{{this.company}}logo" id="card-logo"/>
+              <div id="card-company-name">{{company}}Shmoe Labs</div>
+            </div>
+          </div>
           <div class="card-contents">
-            <div id="name">{{firstName}} {{lastName}}</div>
-            <div id="title">{{title}}</div>
-            <div id="phone">{{phone}}</div>
-            <div id="email">{{email}}</div>
-            <div id="company">{{company}}</div>
-            <!-- <div id="logo"><img src="" alt="logo" id="this.company.logo"/></div> -->
+            <div id="card-name">{{firstName}}Joe McShmoerson {{lastName}}</div>
+            <div id="card-title">{{title}}Head Honcho</div>
+            <div id="card-phone">{{phone}}999-999-9999</div>
+            <div id="card-email">{{email}}joe@shmoeindustries.com</div>
+          </div>
+          <div class="links">
             <div id="url">{{social_media_links.url}}</div>
             <!-- <ul id="links">
               {{#each links}}

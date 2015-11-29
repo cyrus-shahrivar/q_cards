@@ -27,7 +27,7 @@ $(function () {
   $("footer").on('click', "#logout-link", postLogout);
 
   $("header").on('click', "#header-logo", getProfile);
-  //$("header").on('click', "#add-card", newCard);
+  $("header").on('click', "#add-card", scanCard);
 
   // // Username link click
   // $('#contacts-screen').on('load', 'td a.linkshowuser', renderContacts);
