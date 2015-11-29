@@ -8,9 +8,9 @@ var express    = require('express'),
     fs         = require('fs-extra'),
     util       = require('util'),
     path       = require('path'),
-    compression= require('compression')
+    compression= require('compression'),
 methodOverride = require('method-override'),
-    Company = require('./models/company.js')
+    Company = require('./models/company.js'),
     User       = require('./models/user.js'),
     // companies  = require('./controllers/companies_controller.js'),
     // users      = require('./controllers/users_controller.js'),
@@ -116,8 +116,8 @@ app.get('/companies', function(req, res) {
 //creates a new user
 app.post('/users', function (req, res) {
   //does not work! gives 500 error
-  var poop = JSON.parse(req.body);
-  var user = new User(poop);
+  // var poop = JSON.parse(req.body);
+  var user = new User(req.body);
   console.log(req.body);
   user.save(function (err) {
     if (err) {

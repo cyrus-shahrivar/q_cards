@@ -64,12 +64,12 @@ var getProfileAndPostSettings = function() {
     username: $("#username").val(),
     password: $("#password").val(),
     own_card: {
-        'firstName': $("#firstName").val(),
-        'lastName': $("#lastName").val(),
-        'email': $("#email").val(),
-        'phone': $("#phone").val(),
-        'company': $("#company").val(),
-        'socialMedia': $("#social-media").val()
+        firstName: $("#firstName").val(),
+        lastName: $("#lastName").val(),
+        email: $("#email").val(),
+        phone: $("#phone").val(),
+        company: $("#company").val(),
+        socialMedia: $("#social-media").val()
     }
   };
 
@@ -83,11 +83,13 @@ var getProfileAndPostSettings = function() {
   };
 
   //Posts new user and company info to respective collections
-$.ajax({ url        : '/users',
+  $.ajax({ url        : '/users',
         type       : 'POST',
-        data       : {'userInfo':JSON.stringify(userInfo)},
+        dataType       : "json",
+        contentType: 'application/json; charset=UTF-8',
+        data       : JSON.stringify(userInfo),
         success    : function(){ console.log("success");}
-      })
+      });
 
   $.post('/companies/', companyInfo);
 

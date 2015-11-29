@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
     CompanySchema = require('./company.js'),
     BusinessCardInfo = require('./businessCardInfo.js'),
-    qr = require('../helpers/qrGenerator.js')
+    qr = require('../helpers/qrGenerator.js'),
     bcrypt = require('bcrypt');
 /*
 User object has two components: my_card - public profile to share the QR code with others users, and
