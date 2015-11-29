@@ -1,7 +1,28 @@
-var home = require('./home');
 var upload = require('formidable-upload');
 
-var uploader = upload().accept(/image*/).to(['public', 'data', 'images'], '9876543210').imguri();
+var scan = {
+    index: function index(req, res, next) {
+        res.locals.title = 'Home';
+        res.render('index');
+    },
+
+    upload: function uploadfn(req, res, next) {
+        res.json(req.files);
+    },
+
+    errors: function errorsfn(err, req, res, next) {
+        res.json({
+            result: 'failed',
+            error: err.message
+        });
+    }
+};
+
+
+var uploader = upload()
+	.accept(/image*/)
+	.to(['public', 'temp'], 'QRupload')
+	.imguri();
 
 module.exports = function (app) {
     app.get('/', home.index);
