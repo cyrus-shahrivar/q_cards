@@ -73,7 +73,10 @@ var getProfileAndPostSettings = function() {
         email: $("#email").val(),
         phone: $("#phone").val(),
         company: $("#company").val(),
-        socialMedia: $("#social-media").val()
+        socialMedia: $("#social-media").val(),
+        //VERY VERY VERY MINIMUM THIS WORKS AND WE SHOULD USE IT IF ALL ELSE FAILS - SEE BELOW
+        qr_code: ""
+        // qr_code: "https://api.qrserver.com/v1/create-qr-code/?data=" + $("#firstName").val() + $("#lastName").val()
     }
   };
 
@@ -98,7 +101,6 @@ var getProfileAndPostSettings = function() {
             var appBody = $('#app-body');
             var loginScreen = Handlebars.compile($("#login-template").html());
             appBody.append(loginScreen);
-            login();
       });
 
   $.post('/companies/', companyInfo);
