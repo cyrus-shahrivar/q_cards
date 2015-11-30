@@ -12,14 +12,8 @@ var express    = require('express'),
 methodOverride = require('method-override'),
     Company = require('./models/company.js'),
     User       = require('./models/user.js'),
-    // companies  = require('./controllers/companies_controller.js'),
-    // users      = require('./controllers/users_controller.js'),
-    // sessions   = require('./controllers/sessions_controller.js'),
     router     = express.Router(),
     app        = express();
-    // cookieParser = require('cookie-parser'),
-    // passport = require('passport'),
-    // LocalStrategy = require('passport-local').Strategy;
 
 //set up middleware
 app.use(logger('dev'));
@@ -86,8 +80,6 @@ app.get('/current_user', function(req, res) {
       res.send(user);
     });
   });
-
-
 });
 
 //for finding contacts and displaying them
@@ -95,20 +87,7 @@ app.get('/current_user/contacts', function(req, res) {
   User.findById(req.session.currentUser).exec(function (err, user) {
     var contactsArray = [];
     var contacts = user.contacts;
-      // contacts.forEach(function (contact) {
-      //   var counter = contacts.length;
-      //   console.log("Current counter: " + counter);
-      //   console.log("This is contacts: " + contact);
-      //   User.findById(contact).exec(function (err, person) {
-      //   console.log("This is person.own_card" + person.own_card);
-      //   contactsArray.push(person.own_card);
-      //   console.log("Current contacts array: " + contactsArray);
-      //   counter--;
-      //   console.log("Current counter: " + counter);
-      //   if(counter==0) res.send(contactsArray);
-      //   });
-      //
-      // });
+//added counter, so the res.send() does not get executed before all contacts are processed
       for (var i = 0; i < contacts.length; i++){
         var counter = contacts.length;
         //  console.log("Current counter, before pushing: " + counter);
@@ -135,13 +114,19 @@ app.post('/users/update', function (req, res) {
   User.findById(req.session.currentUser).exec(function (err, data) {
     console.log(data);
     res.send(data);
+    // User.findOneAndUpdate({_id: req.session.currentUser}, {$set: {"own_card.qr_code": "http://api.qrserver.com/v1/create-qr-code/?data=" + personInfo + " Qcard Id: " + req.session.currentUser}}, {"new": true}, function (err, user) {
+    //   // var QRCode = user.own_card.qr_code;
+    //   // QRCode = "http://api.qrserver.com/v1/create-qr-code/?data=" + req.session.currentUser;
+    //   res.send(user);
+    // });
+
+
+
   });
 });
 
 //creates a new user
 app.post('/users', function (req, res) {
-  //does not work! gives 500 error
-  // var poop = JSON.parse(req.body);
   var user = new User(req.body);
   console.log(req.body);
   user.save(function (err) {
@@ -154,14 +139,14 @@ app.post('/users', function (req, res) {
   });
 });
 
-//creates a new user
+//creates a new company
 app.post('/companies', function (req, res) {
   var company = new Company(req.body);
   company.save(function (err) {
     if (err) {
       console.log(err);
     } else {
-      console.log('User saved');
+      console.log('Company saved');
       res.send(company);
     }
   });
@@ -205,8 +190,3 @@ app.delete('/sessions', function (req,res) {
   console.log("delete route hit");
   res.send("Deleting session");
 });
-
-// app.use('/', sessions);
-// app.use('/users', users);
-// app.use('/companies', companies);
-// module.exports = app;

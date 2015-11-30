@@ -107,9 +107,7 @@ var getSettings = function () {
         });
 
     $.post('/companies/', companyInfo);
-  }
-  );
-
+  });
 
 };
 
