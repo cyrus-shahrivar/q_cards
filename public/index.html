@@ -87,13 +87,14 @@
       <!-- settings-template has all the fields for registering a new user or updating user information -->
       <template id="settings-template">
       <div class="page" id="settings-container">
-        <p><input type="text" placeholder="Username" name="username" id="username"></p>
-        <p><input type="password" placeholder="Password" name="password" id="password"></p>
-        <p><input type="text" placeholder="First Name" name="firstName" id="firstName"></p>
-        <p><input type="text" placeholder="Last Name" name="lastName" id="lastName"></p>
-        <p><input type="tel" placeholder="Phone Number" name="phone" id="phone"></p>
-        <p><input type="email" placeholder="Email Address" name="email" id="email"></p>
-        <p><input type="text" placeholder="Company" name="company" id="company"></p>
+        <p><input type="text" placeholder="Username" name="username" id="username" value={{username}}></p>
+        <p><input type="password" placeholder="Password" name="password" id="password" value={{password}}></p>
+        <p><input type="text" placeholder="First Name" name="firstName" id="firstName" value={{own_card.firstName}}></p>
+        <p><input type="text" placeholder="Last Name" name="lastName" id="lastName" value={{own_card.lastName}}></p>
+        <p><input type="tel" placeholder="Phone Number" name="phone" id="phone" value={{own_card.phone}}></p>
+        <p><input type="email" placeholder="Email Address" name="email" id="email" value={{own_card.email}}></p>
+        <p><input type="text" placeholder="Company" name="company" id="company" value={{own_card.company}}></p>
+        <p><input type="text" placeholder="Contacts" name="contacts" id="contacts" value={{contacts}}></p>
         <p><input type="text" placeholder="Company Address" name="company-address" id="company-address"></p>
         <p><input type="text" placeholder="Company Phone" name="company-phone" id="company-phone"></p>
         <p><input type="text" placeholder="Company Email" name="company-email" id="company-email"></p>
@@ -119,7 +120,6 @@
             <div id="url">{{social_media_links.url}}</div>
           </div>
         </div>
-      {{/each}}
       </div>
       </template>
 
