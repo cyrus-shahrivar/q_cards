@@ -6,10 +6,8 @@ var express    = require('express'),
     upload     = require('formidable-upload'),
     bcrypt     = require('bcrypt'),
     fs         = require('fs-extra'),
-    util       = require('util'),
     path       = require('path'),
     compression= require('compression'),
-methodOverride = require('method-override'),
     Company = require('./models/company.js'),
     User       = require('./models/user.js'),
     router     = express.Router(),
@@ -21,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+
 app.use(session({
   secret: "pillow",
   saveUninitialized: false,
@@ -190,3 +189,19 @@ app.delete('/sessions', function (req,res) {
   console.log("delete route hit");
   res.send("Deleting session");
 });
+
+
+
+
+app.get('/upload', function (req, res) {
+    // User.findById(req.params.id).exec(function (err, user) {
+    //   res.send(user);
+    // });
+});
+// app.post('/upload', uploader.middleware('imagefile'), scan.upload, scan.errors);
+
+
+// app.use('/', sessions);
+// app.use('/users', users);
+// app.use('/companies', companies);
+// module.exports = app;

@@ -195,21 +195,54 @@ var getProfile = function() {
 };
 
 var scanCard = function() {
+  console.log("the click worked...");
   $("#app-body").empty();
-  var plus = $("#add-card");
   var appBody = $('#app-body');
   var scanScreen = Handlebars.compile($("#scan-card-template").html());
-  // app.get('/upload', home.index);
-  // app.post('/upload', uploader.middleware('imagefile'), home.upload, home.errors);
   appBody.append(scanScreen);
-
-  // $("#app-body").empty();
-  // var appBody = $('#app-body');
-  // var scanScreen = Handlebars.compile($("#scan-card-template").html());
-  // // var scanCard = $('<input>').attr('type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"')
-  // appBody.append(scanScreen);
-
+  $.get('/upload', function (data) {
+    formSubmit();
+    });
+  // app.post('/upload', uploader.middleware('imagefile'), home.upload, home.errors);
 };
+
+//this is supposed to submit the form without redirecting to the API, but is not working, so I enabled in-form submission in the HTML with the attribute: onchange="this.form.submit();"
+var formSubmit = function(e){
+  console.log(e);
+  e.preventDefault(); //This will prevent the default click action.
+  $.ajax({
+      type: "POST",
+      url: "/upload",
+      success: function() {
+          console.log('Form Successfully Submitted');
+      },  
+      error: function() {
+          res.send('There was an error submitting the form');
+      }   
+  }); 
+  return false; // Returning false will stop page from reloading.
+  renderCard();
+}   
+
+//AUGH not working because formSubmit() is not working.  Would flesh out and refine if I could get formSubmit functional.
+  var renderCard = function(data){
+    console.log(data);
+    res.send(data);
+    var $card = $('div').addClass('card');
+    appBody = $('#app-body');
+    appBody.append($card)
+
+    // var $container = $('#solo-pokemon');
+    // var html = renderTemplate_showOne(data);
+    // $('#solo-pokemon').html('').show().append(html);
+    // $('#search-field').val('');
+  };
+    // capture the jq destination/container
+    //feed the template some html
+    //go to the container we want, clear it out, show if it's hiding, then append the html.
+    //clear the form
+
+
 
 var postLogout = function() {
     $.ajax({url: '/sessions', method: 'DELETE'}).done(function() {
