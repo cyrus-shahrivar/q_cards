@@ -12,6 +12,7 @@ var express    = require('express'),
 methodOverride = require('method-override'),
     Company = require('./models/company.js'),
     User       = require('./models/user.js'),
+    uploader   = require('./Kyle_Playground/upload_helper.js'),
     // companies  = require('./controllers/companies_controller.js'),
     // users      = require('./controllers/users_controller.js'),
     // sessions   = require('./controllers/sessions_controller.js'),
@@ -193,6 +194,19 @@ app.delete('/sessions', function (req,res) {
   console.log("delete route hit");
   res.send("Deleting session");
 });
+
+
+
+app.get('/upload', function(req,res) {
+  var uploader = upload().accept(/image*/).to(['public', 'temp'], 'QRupload').imguri();
+  console.log("you uploaded some stuff!")
+  res.send("Upload Successful")
+});
+
+app.post('/upload', function(req,res) {
+
+});
+
 
 // app.use('/', sessions);
 // app.use('/users', users);

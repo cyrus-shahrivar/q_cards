@@ -145,6 +145,7 @@ var getProfile = function() {
 };
 
 var scanCard = function() {
+  console.log("the click worked...")
   $("#app-body").empty();
   var plus = $("#add-card");
   var appBody = $('#app-body');
