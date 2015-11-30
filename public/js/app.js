@@ -15,7 +15,7 @@ $(function () {
 
   // Below are the event listeners within the document ready function.
   $("#app-body").on('click', "#login-button", login);
-  $("#app-body").on('click', "#sign-up-button", getSettings);
+  $("#app-body").on('click', "#sign-up-button", getSignUp);
   $("#app-body").on('click', "#update-account", getProfileAndPostSettings);
   $("#app-body").on('click', "#my-cards", getMyCards);
   $("#app-body").on('click', "#search", searchContacts);
@@ -52,13 +52,65 @@ var login = function() {
   });
 };
 
-
-// Utilize for getting sign-up / settings page.
-var getSettings = function () {
+var getSignUp = function () {
   $("#app-body").empty();
   var appBody = $('#app-body');
   var settingsScreen = Handlebars.compile($("#settings-template").html());
   appBody.append(settingsScreen);
+};
+
+// Utilize for getting sign-up / settings page.
+var getSettings = function () {
+  //get current user info
+  var userInfo = {
+    username: $("#username").val(),
+    password: $("#password").val(),
+    own_card: {
+        firstName: $("#firstName").val(),
+        lastName: $("#lastName").val(),
+        email: $("#email").val(),
+        phone: $("#phone").val(),
+        company: $("#company").val(),
+        socialMedia: $("#social-media").val(),
+        //VERY VERY VERY MINIMUM THIS WORKS AND WE SHOULD USE IT IF ALL ELSE FAILS - SEE BELOW
+        qr_code: ""
+        // qr_code: "https://api.qrserver.com/v1/create-qr-code/?data=" + $("#firstName").val() + $("#lastName").val()
+    }
+  };
+
+  var companyInfo = {
+    name: $("#company").val(),
+    address: $("#company-address").val(),
+    logo: $("#company-logo-url").val(),
+    website: $("#company-website-url").val(),
+    phone: $("#company-phone").val(),
+    email: $("#company-email").val()
+  };
+
+  $.get('/current_user' , function (data) {
+    $("#app-body").empty();
+    var appBody = $('#app-body');
+    var settingsScreen = Handlebars.compile($("#settings-template").html());
+    appBody.append(settingsScreen(data));
+  }).done( function () {
+    $.ajax({ url        : '/users/update',
+          type       : 'POST',
+          dataType       : "json",
+          contentType: 'application/json; charset=UTF-8',
+          data       : JSON.stringify(userInfo),
+          success    : function(){ console.log("success");}
+        }).done(function(){
+          $('#app-body').empty();
+              var appBody = $('#app-body');
+              var loginScreen = Handlebars.compile($("#login-template").html());
+              appBody.append(loginScreen);
+        });
+
+    $.post('/companies/', companyInfo);
+  }
+  );
+
+
 };
 
 // Utilize for getting profile pages and posting settings form / registration form information.

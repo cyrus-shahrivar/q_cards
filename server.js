@@ -78,11 +78,16 @@ app.get('/users/:id', authenticate, restrictAccess, function (req, res) {
 
 //to send current session's user to app.js and subsequent view in html template
 app.get('/current_user', function(req, res) {
-  User.findOneAndUpdate({_id: req.session.currentUser}, {$set: {"own_card.qr_code": "http://api.qrserver.com/v1/create-qr-code/?data=" + req.session.currentUser}}, {"new": true}, function (err, user) {
-    // var QRCode = user.own_card.qr_code;
-    // QRCode = "http://api.qrserver.com/v1/create-qr-code/?data=" + req.session.currentUser;
-    res.send(user);
+  User.findById(req.session.currentUser).exec(function (err, person) {
+    var personInfo = "First Name: " + person.own_card.firstName + " Last Name: " + person.own_card.lastName + " Email: " + person.own_card.email + " Phone: " + person.own_card.phone + " Company: " + person.own_card.company + " Title: " + person.own_card.title + " Social Media Links: " + person.own_card.social_media_links;
+    User.findOneAndUpdate({_id: req.session.currentUser}, {$set: {"own_card.qr_code": "http://api.qrserver.com/v1/create-qr-code/?data=" + personInfo + " Qcard Id: " + req.session.currentUser}}, {"new": true}, function (err, user) {
+      // var QRCode = user.own_card.qr_code;
+      // QRCode = "http://api.qrserver.com/v1/create-qr-code/?data=" + req.session.currentUser;
+      res.send(user);
+    });
   });
+
+
 });
 
 //for finding contacts and displaying them
@@ -123,6 +128,13 @@ app.get('/current_user/contacts', function(req, res) {
 app.get('/companies', function(req, res) {
   Company.find().exec(function (err, companies) {
     res.send(companies);
+  });
+});
+
+app.post('/users/update', function (req, res) {
+  User.findById(req.session.currentUser).exec(function (err, data) {
+    console.log(data);
+    res.send(data);
   });
 });
 
