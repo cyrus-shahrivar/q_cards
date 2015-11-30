@@ -197,21 +197,31 @@ var getProfile = function() {
 };
 
 var scanCard = function() {
+  console.log("the click worked...");
   $("#app-body").empty();
-  var plus = $("#add-card");
   var appBody = $('#app-body');
   var scanScreen = Handlebars.compile($("#scan-card-template").html());
-  // app.get('/upload', home.index);
+  app.get('/upload', function (data) {
+    data.forEach(function (contact) {
+      var appBody = $('#app-body');
+      var myCardsScreen = Handlebars.compile($("#contacts-template").html());
+      appBody.append(myCardsScreen(contact));
+  });
   // app.post('/upload', uploader.middleware('imagefile'), home.upload, home.errors);
   appBody.append(scanScreen);
-
-  // $("#app-body").empty();
-  // var appBody = $('#app-body');
-  // var scanScreen = Handlebars.compile($("#scan-card-template").html());
-  // // var scanCard = $('<input>').attr('type="file" capture="camera" accept="image/*" id="cameraInput" name="New Contact"')
-  // appBody.append(scanScreen);
-
 };
+
+  var renderOne = function(data){
+    console.log(data);
+    var $container = $('#solo-pokemon');
+    var html = renderTemplate_showOne(data);
+    $('#solo-pokemon').html('').show().append(html);
+    $('#search-field').val('');
+  };
+    // capture the jq destination/container
+    //feed the template some html
+    //go to the container we want, clear it out, show if it's hiding, then append the html.
+    //clear the form
 
 var postLogout = function() {
     $.ajax({url: '/sessions', method: 'DELETE'}).done(function() {

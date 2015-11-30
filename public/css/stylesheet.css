@@ -37,8 +37,7 @@ h1, h2, h3, h4 {
 }
 
 .page {
-  margin-top: 60px;
-  margin-bottom: 90px;
+  margin: 60px 30px 90px 30px;
 }
 
 
@@ -95,13 +94,13 @@ header {
   top: -20px;
   font-size: 70px;
   outline: black;
-}
+}*/
 
 #add-card:hover {
   cursor: pointer;
   border: 3px solid rgba(100, 100, 100, 1);
   box-sizing: border-box;
-}*/
+}
 
 #add-card {
   position: absolute;

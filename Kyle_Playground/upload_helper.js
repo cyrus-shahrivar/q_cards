@@ -1,9 +1,10 @@
-var upload = require('formidable-upload');
 
+
+// var scanTemplate = Handlebars.compile($("#scan-card-template").html());
+module.exports = function() {
 var scan = {
     index: function index(req, res, next) {
-        res.locals.title = 'Home';
-        res.render('index');
+        res.render("#scan-card-template");
     },
 
     upload: function uploadfn(req, res, next) {
@@ -18,17 +19,7 @@ var scan = {
     }
 };
 
-
-var uploader = upload()
-	.accept(/image*/)
-	.to(['public', 'temp'], 'QRupload')
-	.imguri();
-
-module.exports = function (app) {
-    app.get('/', home.index);
-    app.get('/upload', home.index);
-    app.post('/upload', uploader.middleware('imagefile'), home.upload, home.errors);
-};
+}
 
 
  //[Formidable Upload Example](https://github.com/vnykmshr/formidable-upload-example).
