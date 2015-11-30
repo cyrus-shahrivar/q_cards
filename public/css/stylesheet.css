@@ -104,8 +104,8 @@ header {
 
 #add-card {
   position: absolute;
-  right:25px;
-  margin-top: 5px;
+  right:10px;
+  margin-top: 2px;
   height: 48px;
   width: 48px;
   border: 1px solid #C0C0C0;

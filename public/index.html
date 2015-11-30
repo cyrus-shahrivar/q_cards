@@ -94,21 +94,23 @@
       <!-- settings-template has all the fields for registering a new user or updating user information -->
       <template id="settings-template">
       <div class="page" id="settings-container">
-        <p><input type="text" placeholder="Username" name="username" id="username" value={{username}}></p>
-        <p><input type="password" placeholder="Password" name="password" id="password" value={{password}}></p>
-        <p><input type="text" placeholder="First Name" name="firstName" id="firstName" value={{own_card.firstName}}></p>
-        <p><input type="text" placeholder="Last Name" name="lastName" id="lastName" value={{own_card.lastName}}></p>
-        <p><input type="tel" placeholder="Phone Number" name="phone" id="phone" value={{own_card.phone}}></p>
-        <p><input type="email" placeholder="Email Address" name="email" id="email" value={{own_card.email}}></p>
-        <p><input type="text" placeholder="Company" name="company" id="company" value={{own_card.company}}></p>
-        <p><input type="text" placeholder="Contacts" name="contacts" id="contacts" value={{contacts}}></p>
-        <p><input type="text" placeholder="Company Address" name="company-address" id="company-address"></p>
-        <p><input type="text" placeholder="Company Phone" name="company-phone" id="company-phone"></p>
-        <p><input type="text" placeholder="Company Email" name="company-email" id="company-email"></p>
-        <p><input type="text" placeholder="Company Website" name="company-website" id="company-website-url"></p>
-        <p><input type="text" placeholder="Company Logo" name="company-logo" id="company-logo-url"></p>
-        <p><input type="text" placeholder="Social Media URLs (Separate By Commas)" name="seach" id="social-media"></p>
-        <p><button type="button" name="button" id="update-account">Update Account</button></p>
+        <p>
+        <input type="text" placeholder="Username" name="username" id="username" value={{username}}><br>
+        <input type="password" placeholder="Password" name="password" id="password" value={{password}}><br>
+        <input type="text" placeholder="First Name" name="firstName" id="firstName" value={{own_card.firstName}}><br>
+        <input type="text" placeholder="Last Name" name="lastName" id="lastName" value={{own_card.lastName}}><br>
+        <input type="tel" placeholder="Phone Number" name="phone" id="phone" value={{own_card.phone}}><br>
+        <input type="email" placeholder="Email Address" name="email" id="email" value={{own_card.email}}><br>
+        <p><input type="text" placeholder="Company" name="company" id="company" value={{own_card.company}}><br>
+        <input type="text" placeholder="Title" name="title" id="title" value={{title}}><br>
+        <input type="text" placeholder="Company Address" name="company-address" id="company-address"><br>
+        <input type="text" placeholder="Company Phone" name="company-phone" id="company-phone"><br>
+        <input type="text" placeholder="Company Email" name="company-email" id="company-email"><br>
+        <input type="text" placeholder="Company Website" name="company-website" id="company-website-url"><br>
+        <input type="text" placeholder="Company Logo URL" name="company-logo" id="company-logo-url"><br>
+        <input type="text" placeholder="Social Media URLs (Separate By Commas)" name="seach" id="social-media"><br>
+        <button type="button" name="button" id="update-account">Submit</button>
+        </p>
       </div>
       </template>
 
@@ -145,9 +147,9 @@
       <div class="page" id="about-page">
         <h2>About</h2>
         <p>
-          Qcards replaces your business card with a simple QR code, scannable by other Qcarders. It is designed to give professionals a fast and convenient way to trade and track business contacts without disintegrating in a pocket, winding up in the trash bin or getting lost among personal contacts in your phone.</p>
-        <br>
-        <p>Our mission is to reduce paper clutter in your wallet, your washing machine and in our world, one scan at a time.
+          Qcards replaces your business card with a simple QR code, scannable by other Qcarders. It is designed to give professionals a fast and convenient way to trade and track business contacts without disintegrating in a pocket, winding up in the trash bin or getting lost among personal contacts in your phone.
+          <br><br>
+          Our mission is to reduce paper clutter in your wallet, your washing machine and in our world, one scan at a time.
         </p>
       </div>
       </template>
@@ -156,34 +158,34 @@
 <!-- scan-card-template will scan a new card -->
       <template id="scan-card-template">
         <div class="page">
-          <p>You are about to scan...</p>
-          <!-- <form enctype="multipart/form-data" action="http://api.qrserver.com/v1/read-qr-code/?fileurl=" method="POST">
-            <!-- MAX_FILE_SIZE (maximum file size in bytes) must precede the file input field used to upload the QR code image -->
-            <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
-            <!-- The "name" of the input field has to be "file" as it is the name of the POST parameter -->
-            <div id="add-card-scan-template">
-              <input type="file" capture="camera" accept="image/*" id="camera-input" name="New Contact" accept-charset="utf-8" method="post" action="/upload" enctype="multipart/form-data">
-              <div class="upload-filename" id="upload-filename"></div>
-            </div>
-            <br>
-            <input type="submit" name="imagefile" multiple="multiple" value="Read Qcard" />
-            <button class="upload-btn" type="submit">Read Qcard</button>
-          </form>  -->
-
-          <form enctype="multipart/form-data" action="http://api.qrserver.com/v1/read-qr-code/" method="POST">
-          <!-- MAX_FILE_SIZE (maximum file size in bytes) must precede the file input field used to upload the QR code image -->
-          <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
-          <!-- The "name" of the input field has to be "file" as it is the name of the POST parameter -->
-          Choose QR code image to read/scan: <input name="file" type="file" />
-          <input type="submit" value="Read QR code" />
-          </form>
+          Click the red button<br>to scan a new QR code...<br>
         </div>
+        {{each JSON}}
+        <div class="card" id="my-card">
+          <div id="card-company">
+            <div class="card-logo">
+              <img src="./images/Qlogo.png" alt="{{this.company}}logo" id="card-logo"/>
+              <div id="card-company-name">{{company}}</div>
+            </div>
+          </div>
+          <div class="card-contents">
+            <div id="card-name">{{firstName}} {{lastName}}</div>
+            <div id="card-title">{{title}}</div>
+            <div id="card-phone">{{phone}}</div>
+            <div id="card-email">{{email}}</div>
+          </div>
+          <div class="links">
+            <div id="url">{{social_media_links.url}}</div>
+            <!-- <ul id="links">
+              {{#each links}}
+                <li><a href="url">location</a></li>
+              {{/each}}
+            </ul> -->
+          </div>
+        </div>
+        {{/each}}
       </template>
 
-
-<!-- -->
-
-<!-- -->
 
 
 <!-- footer has the navigation tab bar and copyright that appears at the bottom of all pages -->

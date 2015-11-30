@@ -6,13 +6,10 @@ var express    = require('express'),
     upload     = require('formidable-upload'),
     bcrypt     = require('bcrypt'),
     fs         = require('fs-extra'),
-    util       = require('util'),
     path       = require('path'),
     compression= require('compression'),
-methodOverride = require('method-override'),
     Company = require('./models/company.js'),
     User       = require('./models/user.js'),
-    uploader   = require('./helpers/upload_helper.js'),
     // companies  = require('./controllers/companies_controller.js'),
     // users      = require('./controllers/users_controller.js'),
     // sessions   = require('./controllers/sessions_controller.js'),
@@ -208,28 +205,13 @@ app.delete('/sessions', function (req,res) {
   res.send("Deleting session");
 });
 
-// /////////////////////  SCANNING  ////////////////////////////
-// var uploader = upload().accept(/image*/).to(['public', 'temp'], 'QRupload').imguri();
-// var scan = {
-//     index: function index(req, res, next) {
-//         res.locals.title = 'Home';
-//         res.render('index');
-//     },
-
-//     upload: function uploadfn(req, res, next) {
-//         res.json(req.files);
-//     },
-
-//     errors: function errorsfn(err, req, res, next) {
-//         res.json({
-//             result: 'failed',
-//             error: err.message
-//         });
-//     }
-// };
 
 
-// app.get('/upload', scan.index);
+app.get('/upload', function (req, res) {
+    // User.findById(req.params.id).exec(function (err, user) {
+    //   res.send(user);
+    // });
+});
 // app.post('/upload', uploader.middleware('imagefile'), scan.upload, scan.errors);
 
 
