@@ -2,8 +2,9 @@
 
 ## A modern way to share your business card!
 
-### Authors: Kyle Gorjanc, Kate Shishkina, Cyrus Shahrivar
-### Date: November 30, 2015
+### Original Authors: Kyle Gorjanc, Kate Shishkina, Cyrus Shahrivar
+### Original Date: November 30, 2015
+### Forked April 22, 2016
 
 #### Technologies Used:
 - ExpressJS
